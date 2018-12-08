@@ -1,9 +1,7 @@
-<img width="600" src="https://rawgit.com/Leaflet/Leaflet/master/src/images/logo.svg" alt="Leaflet" />
-
-Leaflet is the leading open-source JavaScript library for **mobile-friendly interactive maps**.
+IntelligentMap is the leading open-source JavaScript library for **mobile-friendly interactive maps**, based on [Leaflet][official website].
 Weighing just about 37 KB of gzipped JS code, it has all the mapping [features][] most developers ever need.
 
-Leaflet is designed with *simplicity*, *performance* and *usability* in mind.
+IntelligentMap is designed with *simplicity*, *performance* and *usability* in mind.
 It works efficiently across all major desktop and mobile platforms out of the box,
 taking advantage of HTML5 and CSS3 on modern browsers while being accessible on older ones too.
 It can be extended with a huge amount of [plugins][],
@@ -11,22 +9,22 @@ has a beautiful, easy to use and [well-documented][] API
 and a simple, readable [source code][] that is a joy to [contribute][] to.
 
 For more info, docs and tutorials, check out the [official website][].<br>
-For **Leaflet downloads** (including the built master version), check out the [download page][].
+For **IntelligentMap downloads** (including the built master version), check out the [download page][].
 
 We're happy to meet new contributors.
 If you want to **get involved** with Leaflet development, check out the [contribution guide][contribute].
 Let's make the best mapping library that will ever exist,
 and push the limits of what's possible with online maps!
 
-[![Build Status](https://travis-ci.org/Leaflet/Leaflet.svg?branch=master)](https://travis-ci.org/Leaflet/Leaflet)
+[![Build Status](https://travis-ci.org/IntelligentMap/IntelligentMap.svg?branch=master)](https://travis-ci.org/IntelligentMap/IntelligentMap)
 
- [contributors]: https://github.com/Leaflet/Leaflet/graphs/contributors
- [features]: http://leafletjs.com/#features
- [plugins]: http://leafletjs.com/plugins.html
- [well-documented]: http://leafletjs.com/reference.html "Leaflet API reference"
- [source code]: https://github.com/Leaflet/Leaflet "Leaflet GitHub repository"
- [hosted on GitHub]: http://github.com/Leaflet/Leaflet
- [contribute]: https://github.com/Leaflet/Leaflet/blob/master/CONTRIBUTING.md "A guide to contributing to Leaflet"
- [official website]: http://leafletjs.com
- [download page]: http://leafletjs.com/download.html
+ [contributors]: https://github.com/IntelligentMap/IntelligentMap/graphs/contributors
+ [features]: http://intelligentmap.oopscommand.com/#features
+ [plugins]: http://intelligentmap.oopscommand.com/plugins.html
+ [well-documented]: http://intelligentmap.oopscommand.com/reference.html "IntelligentMap API reference"
+ [source code]: https://github.com/IntelligentMap/IntelligentMap "IntelligentMap GitHub repository"
+ [hosted on GitHub]: http://github.com/IntelligentMap/IntelligentMap
+ [contribute]: https://github.com/IntelligentMap/IntelligentMap/blob/master/CONTRIBUTING.md "A guide to contributing to IntelligentMap"
+ [official website]: http://intelligentmap.oopscommand.com
+ [download page]: http://intelligentmap.oopscommand.com/download.html
 
