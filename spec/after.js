@@ -1,1 +1,1 @@
-L.Icon.Default.imagePath = '/base/dist/images/';
+Cartographer.Icon.Default.imagePath = '/base/dist/images/';
