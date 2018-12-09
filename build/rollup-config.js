@@ -39,7 +39,7 @@ export default {
 		{
 			file: pkg.main,
 			format: 'umd',
-			name: 'L',
+			name: 'Cartographer',
 			banner: banner,
 			outro: outro,
 			sourcemap: true

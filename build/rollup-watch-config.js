@@ -18,7 +18,7 @@ export default {
 	output: {
 		file: 'dist/cartographer-src.js',
 		format: 'umd',
-		name: 'L',
+		name: 'Cartographer',
 		banner: banner,
 		sourcemap: true
 	},
