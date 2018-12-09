@@ -16,7 +16,7 @@ If you want to **get involved** with Leaflet development, check out the [contrib
 Let's make the best mapping library that will ever exist,
 and push the limits of what's possible with online maps!
 
-[![Build Status](https://travis-ci.org/IntelligentMap/IntelligentMap.svg?branch=master)](https://travis-ci.org/IntelligentMap/IntelligentMap)
+[![Build Status](https://travis-ci.org/IntelligentMap/Cartographer.svg?branch=master)](https://travis-ci.org/IntelligentMap/Cartographer)
 
  [contributors]: https://github.com/IntelligentMap/IntelligentMap/graphs/contributors
  [features]: http://intelligentmap.oopscommand.com/#features
