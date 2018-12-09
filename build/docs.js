@@ -2,7 +2,7 @@ var packageDef = require('../package.json');
 
 function buildDocs() {
 
-	console.log('Building Leaflet documentation with Leafdoc');
+	console.log('Building Cartographer documentation with Leafdoc');
 
 	var LeafDoc = require('leafdoc');
 	var doc = new LeafDoc({

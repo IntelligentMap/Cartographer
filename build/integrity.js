@@ -5,15 +5,15 @@ var ssri = require('ssri');
 var fs   = require('fs');
 var version = require('../package.json').version;
 
-const integritySrc = ssri.fromData(fs.readFileSync('dist/leaflet-src.js'));
-const integrityUglified = ssri.fromData(fs.readFileSync('dist/leaflet.js'));
-const integrityCss = ssri.fromData(fs.readFileSync('dist/leaflet.css'));
+const integritySrc = ssri.fromData(fs.readFileSync('dist/cartographer-src.js'));
+const integrityUglified = ssri.fromData(fs.readFileSync('dist/cartographer.js'));
+const integrityCss = ssri.fromData(fs.readFileSync('dist/cartographer.css'));
 
 
 console.log('Integrity hashes for ', version, ':');
-console.log('dist/leaflet-src.js: ', integritySrc.toString());
-console.log('dist/leaflet.js:     ', integrityUglified.toString());
-console.log('dist/leaflet.css:    ', integrityCss.toString());
+console.log('dist/cartographer-src.js: ', integritySrc.toString());
+console.log('dist/cartographer.js:     ', integrityUglified.toString());
+console.log('dist/cartographer.css:    ', integrityCss.toString());
 
 var docConfig = fs.readFileSync('docs/_config.yml').toString();
 

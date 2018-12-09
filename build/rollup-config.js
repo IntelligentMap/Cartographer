@@ -19,8 +19,8 @@ if (process.env.NODE_ENV === 'release') {
 }
 
 const banner = `/* @preserve
- * Leaflet ${version}, a JS library for interactive maps. http://leafletjs.com
- * (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
+ * Cartographer (forked Leaflet) ${version}, a JS library for interactive maps. http://maps.oopscommand.com/engine
+ * (c) 2018 Pavel Kosilo and IntelligentMap contributors, (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 `;
 
@@ -34,7 +34,7 @@ exports.noConflict = function() {
 window.L = exports;`;
 
 export default {
-	input: 'src/Leaflet.js',
+	input: 'src/Cartographer.js',
 	output: [
 		{
 			file: pkg.main,
@@ -45,7 +45,7 @@ export default {
 			sourcemap: true
 		},
 		{
-			file: 'dist/leaflet-src.esm.js',
+			file: 'dist/cartographer-src.esm.js',
 			format: 'es',
 			banner: banner,
 			sourcemap: true

@@ -15,7 +15,7 @@ module.exports = function (config) {
 // 	var libSources = require(__dirname + '/../build/build.js').getFiles();
 
 	var files = [
-		"src/Leaflet.js",
+		"src/Cartographer.js",
 		"spec/after.js",
 		"node_modules/happen/happen.js",
 		"node_modules/prosthetic-hand/dist/prosthetic-hand.js",
@@ -31,7 +31,7 @@ module.exports = function (config) {
 		preprocessors['src/**/*.js'] = ['coverage'];
 	}
 
-	preprocessors['src/Leaflet.js'] = ['rollup'];
+	preprocessors['src/Cartographer.js'] = ['rollup'];
 
 	config.set({
 		// base path, that will be used to resolve files and exclude

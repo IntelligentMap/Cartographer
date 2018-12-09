@@ -8,15 +8,15 @@ const branch = gitRev.branch();
 const rev = gitRev.short();
 const version = require('../package.json').version + '+' + branch + '.' + rev;
 const banner = `/* @preserve
- * Leaflet ${version}, a JS library for interactive maps. http://leafletjs.com
- * (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
+ * Cartographer (forked Leaflet) ${version}, a JS library for interactive maps. http://maps.oopscommand.com/engine
+ * (c) 2018 Pavel Kosilo and IntelligentMap contributors, (c) 2010-2018 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 `;
 
 export default {
-	input: 'src/Leaflet.js',
+	input: 'src/Cartographer.js',
 	output: {
-		file: 'dist/leaflet-src.js',
+		file: 'dist/cartographer-src.js',
 		format: 'umd',
 		name: 'L',
 		banner: banner,

@@ -1,0 +1,10 @@
+Cartographer is a fork of Leaflet. It was forked on December 8, 2018.
+Leaflet is originally created by CloudMade in 2010-2011 and Vladimir
+Agafonkin in 2010-2018, and now forked Leaflet, named Cartographer, is
+maintaining by Pavel Kosilo.
+
+Here is an inevitably incomplete list of MUCH-APPRECIATED CONTRIBUTORS --
+people who have submitted patches, reported bugs, added translations, helped
+answer newbie questions, and generally made Cartographer that much better:
+
+    Pavel Kosilo <kodosgames@gmail.com>
