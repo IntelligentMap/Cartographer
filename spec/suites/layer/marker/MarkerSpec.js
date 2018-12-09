@@ -10,9 +10,9 @@ describe("Marker", function () {
 		div.style.height = '100px';
 		document.body.appendChild(div);
 
-		map = L.map(div).setView([0, 0], 0);
-		icon1 = new L.Icon.Default();
-		icon2 = new L.Icon.Default({
+		map = Cartographer.map(div).setView([0, 0], 0);
+		icon1 = new Cartographer.Icon.Default();
+		icon2 = new Cartographer.Icon.Default({
 			iconUrl: icon1.options.iconUrl + '?2',
 			shadowUrl: icon1.options.shadowUrl + '?2'
 		});
@@ -27,12 +27,12 @@ describe("Marker", function () {
 		it("set the correct x and y size attributes", function () {
 			var expectedX = 96;
 			var expectedY = 100;
-			var sizedIcon = new L.Icon.Default({
+			var sizedIcon = new Cartographer.Icon.Default({
 				iconUrl: icon1.options.iconUrl + '?3',
 				iconSize: [expectedX, expectedY]
 			});
 
-			var marker = new L.Marker([0, 0], {icon: sizedIcon});
+			var marker = new Cartographer.Marker([0, 0], {icon: sizedIcon});
 			map.addLayer(marker);
 
 			var icon = marker._icon;
@@ -43,12 +43,12 @@ describe("Marker", function () {
 
 		it("set the correct x and y size attributes passing only one value", function () {
 			var expectedXY = 96;
-			var sizedIcon = new L.Icon.Default({
+			var sizedIcon = new Cartographer.Icon.Default({
 				iconUrl: icon1.options.iconUrl + '?3',
 				iconSize: expectedXY
 			});
 
-			var marker = new L.Marker([0, 0], {icon: sizedIcon});
+			var marker = new Cartographer.Marker([0, 0], {icon: sizedIcon});
 			map.addLayer(marker);
 
 			var icon = marker._icon;
@@ -57,14 +57,14 @@ describe("Marker", function () {
 			expect(icon.style.height).to.be(expectedXY + 'px');
 		});
 
-		it("set the correct x and y size attributes passing a L.Point instance", function () {
+		it("set the correct x and y size attributes passing a Cartographer.Point instance", function () {
 			var expectedXY = 96;
-			var sizedIcon = new L.Icon.Default({
+			var sizedIcon = new Cartographer.Icon.Default({
 				iconUrl: icon1.options.iconUrl + '?3',
-				iconSize: L.point(expectedXY, expectedXY)
+				iconSize: Cartographer.point(expectedXY, expectedXY)
 			});
 
-			var marker = new L.Marker([0, 0], {icon: sizedIcon});
+			var marker = new Cartographer.Marker([0, 0], {icon: sizedIcon});
 			map.addLayer(marker);
 
 			var icon = marker._icon;
@@ -74,7 +74,7 @@ describe("Marker", function () {
 		});
 
 		it("changes the icon to another image while re-using the IMG element", function () {
-			var marker = new L.Marker([0, 0], {icon: icon1});
+			var marker = new Cartographer.Marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 
 			var beforeIcon = marker._icon;
@@ -86,7 +86,7 @@ describe("Marker", function () {
 		});
 
 		it("preserves draggability", function () {
-			var marker = new L.Marker([0, 0], {icon: icon1});
+			var marker = new Cartographer.Marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 
 			marker.dragging.disable();
@@ -123,11 +123,11 @@ describe("Marker", function () {
 		});
 
 		it("changes the DivIcon to another DivIcon, while re-using the DIV element", function () {
-			var marker = new L.Marker([0, 0], {icon: new L.DivIcon({html: 'Inner1Text'})});
+			var marker = new Cartographer.Marker([0, 0], {icon: new Cartographer.DivIcon({html: 'Inner1Text'})});
 			map.addLayer(marker);
 
 			var beforeIcon = marker._icon;
-			marker.setIcon(new L.DivIcon({html: 'Inner2Text'}));
+			marker.setIcon(new Cartographer.DivIcon({html: 'Inner2Text'}));
 			var afterIcon = marker._icon;
 
 			expect(beforeIcon).to.be(afterIcon); // Check that the <DIV> element is re-used
@@ -135,17 +135,17 @@ describe("Marker", function () {
 		});
 
 		it("removes text when changing to a blank DivIcon", function () {
-			var marker = new L.Marker([0, 0], {icon: new L.DivIcon({html: 'Inner1Text'})});
+			var marker = new Cartographer.Marker([0, 0], {icon: new Cartographer.DivIcon({html: 'Inner1Text'})});
 			map.addLayer(marker);
 
-			marker.setIcon(new L.DivIcon());
+			marker.setIcon(new Cartographer.DivIcon());
 			var afterIcon = marker._icon;
 
 			expect(marker._icon.innerHTML).to.not.contain('Inner1Text');
 		});
 
 		it("changes a DivIcon to an image", function () {
-			var marker = new L.Marker([0, 0], {icon: new L.DivIcon({html: 'Inner1Text'})});
+			var marker = new Cartographer.Marker([0, 0], {icon: new Cartographer.DivIcon({html: 'Inner1Text'})});
 			map.addLayer(marker);
 			var oldIcon = marker._icon;
 
@@ -154,7 +154,7 @@ describe("Marker", function () {
 			expect(oldIcon).to.not.be(marker._icon); // Check that the _icon is NOT re-used
 			expect(oldIcon.parentNode).to.be(null);
 
-			if (L.Browser.retina) {
+			if (Cartographer.Browser.retina) {
 				expect(marker._icon.src).to.contain('marker-icon-2x.png');
 			} else {
 				expect(marker._icon.src).to.contain('marker-icon.png');
@@ -163,11 +163,11 @@ describe("Marker", function () {
 		});
 
 		it("changes an image to a DivIcon", function () {
-			var marker = new L.Marker([0, 0], {icon: icon1});
+			var marker = new Cartographer.Marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 			var oldIcon = marker._icon;
 
-			marker.setIcon(new L.DivIcon({html: 'Inner1Text'}));
+			marker.setIcon(new Cartographer.DivIcon({html: 'Inner1Text'}));
 
 			expect(oldIcon).to.not.be(marker._icon); // Check that the _icon is NOT re-used
 			expect(oldIcon.parentNode).to.be(null);
@@ -177,7 +177,7 @@ describe("Marker", function () {
 		});
 
 		it("reuses the icon/shadow when changing icon", function () {
-			var marker = new L.Marker([0, 0], {icon: icon1});
+			var marker = new Cartographer.Marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 			var oldIcon = marker._icon;
 			var oldShadow = marker._shadow;
@@ -192,7 +192,7 @@ describe("Marker", function () {
 		});
 
 		it("sets the alt attribute to an empty string when no alt text is passed", function () {
-			var marker = L.marker([0, 0], {icon: icon1});
+			var marker = Cartographer.marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 			var icon = marker._icon;
 			expect(icon.hasAttribute('alt')).to.be(true);
@@ -200,7 +200,7 @@ describe("Marker", function () {
 		});
 
 		it("doesn't set the alt attribute for DivIcons", function () {
-			var marker = L.marker([0, 0], {icon: L.divIcon(), alt: 'test'});
+			var marker = Cartographer.marker([0, 0], {icon: Cartographer.divIcon(), alt: 'test'});
 			map.addLayer(marker);
 			var icon = marker._icon;
 			expect(icon.hasAttribute('alt')).to.be(false);
@@ -210,11 +210,11 @@ describe("Marker", function () {
 	describe("#setLatLng", function () {
 		it("fires a move event", function () {
 
-			var marker = new L.Marker([0, 0], {icon: icon1});
+			var marker = new Cartographer.Marker([0, 0], {icon: icon1});
 			map.addLayer(marker);
 
 			var beforeLatLng = marker._latlng;
-			var afterLatLng = new L.LatLng(1, 2);
+			var afterLatLng = new Cartographer.LatLng(1, 2);
 
 			var eventArgs = null;
 			marker.on('move', function (e) {
@@ -234,7 +234,7 @@ describe("Marker", function () {
 		it('fires click event when clicked', function () {
 			var spy = sinon.spy();
 
-			var marker = L.marker([0, 0]).addTo(map);
+			var marker = Cartographer.marker([0, 0]).addTo(map);
 
 			marker.on('click', spy);
 			happen.click(marker._icon);
@@ -245,7 +245,7 @@ describe("Marker", function () {
 		it('fires click event when clicked with DivIcon', function () {
 			var spy = sinon.spy();
 
-			var marker = L.marker([0, 0], {icon: new L.DivIcon()}).addTo(map);
+			var marker = Cartographer.marker([0, 0], {icon: new Cartographer.DivIcon()}).addTo(map);
 
 			marker.on('click', spy);
 			happen.click(marker._icon);
@@ -256,7 +256,7 @@ describe("Marker", function () {
 		it('fires click event when clicked on DivIcon child element', function () {
 			var spy = sinon.spy();
 
-			var marker = L.marker([0, 0], {icon: new L.DivIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'})}).addTo(map);
+			var marker = Cartographer.marker([0, 0], {icon: new Cartographer.DivIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'})}).addTo(map);
 
 			marker.on('click', spy);
 
@@ -270,8 +270,8 @@ describe("Marker", function () {
 		it('fires click event when clicked on DivIcon child element set using setIcon', function () {
 			var spy = sinon.spy();
 
-			var marker = L.marker([0, 0]).addTo(map);
-			marker.setIcon(new L.DivIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'}));
+			var marker = Cartographer.marker([0, 0]).addTo(map);
+			marker.setIcon(new Cartographer.DivIcon({html: '<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" />'}));
 
 			marker.on('click', spy);
 
@@ -286,7 +286,7 @@ describe("Marker", function () {
 			var spy = sinon.spy();
 			var spy2 = sinon.spy();
 			var mapSpy = sinon.spy();
-			var marker = new L.Marker(new L.LatLng(55.8, 37.6));
+			var marker = new Cartographer.Marker(new Cartographer.LatLng(55.8, 37.6));
 			map.addLayer(marker);
 			marker.on('click', spy);
 			marker.on('click', spy2);
@@ -301,7 +301,7 @@ describe("Marker", function () {
 			var spy = sinon.spy();
 			var spy2 = sinon.spy();
 			var mapSpy = sinon.spy();
-			var marker = new L.Marker(new L.LatLng(55.8, 37.6));
+			var marker = new Cartographer.Marker(new Cartographer.LatLng(55.8, 37.6));
 			map.addLayer(marker);
 			marker.on('dblclick', spy);
 			marker.on('dblclick', spy2);
@@ -313,7 +313,7 @@ describe("Marker", function () {
 		});
 
 		it("do not catch event if it does not listen to it", function (done) {
-			var marker = new L.Marker([55, 37]);
+			var marker = new Cartographer.Marker([55, 37]);
 			map.addLayer(marker);
 			marker.once('mousemove', function (e) {
 				// It should be the marker coordinates

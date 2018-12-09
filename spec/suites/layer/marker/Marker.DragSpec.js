@@ -9,7 +9,7 @@ describe("Marker.Drag", function () {
 		div.style.position = 'absolute';
 		document.body.appendChild(div);
 
-		map = L.map(div).setView([0, 0], 0);
+		map = Cartographer.map(div).setView([0, 0], 0);
 	});
 
 	afterEach(function () {
@@ -18,7 +18,7 @@ describe("Marker.Drag", function () {
 
 	describe("drag", function () {
 		it("drags a marker with mouse", function (done) {
-			var marker = new L.Marker([0, 0], {
+			var marker = new Cartographer.Marker([0, 0], {
 				draggable: true
 			});
 			map.addLayer(marker);
@@ -61,7 +61,7 @@ describe("Marker.Drag", function () {
 			});
 
 			it("drags a marker with mouse, compensating for CSS scale", function (done) {
-				var marker = new L.Marker([0, 0], {
+				var marker = new Cartographer.Marker([0, 0], {
 					draggable: true
 				});
 				map.addLayer(marker);
@@ -91,7 +91,7 @@ describe("Marker.Drag", function () {
 		});
 
 		it("pans map when autoPan is enabled", function (done) {
-			var marker = new L.Marker([0, 0], {
+			var marker = new Cartographer.Marker([0, 0], {
 				draggable: true,
 				autoPan: true
 			});

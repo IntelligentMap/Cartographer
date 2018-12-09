@@ -1,39 +1,39 @@
 describe("CRS.EPSG3857", function () {
-	var crs = L.CRS.EPSG3857;
+	var crs = Cartographer.CRS.EPSG3857;
 
 	describe("#latLngToPoint", function () {
 		it("projects a center point", function () {
-			expect(crs.latLngToPoint(L.latLng(0, 0), 0)).near(new L.Point(128, 128), 0.01);
+			expect(crs.latLngToPoint(Cartographer.latLng(0, 0), 0)).near(new Cartographer.Point(128, 128), 0.01);
 		});
 
 		it("projects the northeast corner of the world", function () {
-			expect(crs.latLngToPoint(L.latLng(85.0511287798, 180), 0)).near(new L.Point(256, 0));
+			expect(crs.latLngToPoint(Cartographer.latLng(85.0511287798, 180), 0)).near(new Cartographer.Point(256, 0));
 		});
 	});
 
 	describe("#pointToLatLng", function () {
 		it("reprojects a center point", function () {
-			expect(crs.pointToLatLng(new L.Point(128, 128), 0)).nearLatLng(L.latLng(0, 0), 0.01);
+			expect(crs.pointToLatLng(new Cartographer.Point(128, 128), 0)).nearLatLng(Cartographer.latLng(0, 0), 0.01);
 		});
 
 		it("reprojects the northeast corner of the world", function () {
-			expect(crs.pointToLatLng(new L.Point(256, 0), 0)).nearLatLng(L.latLng(85.0511287798, 180));
+			expect(crs.pointToLatLng(new Cartographer.Point(256, 0), 0)).nearLatLng(Cartographer.latLng(85.0511287798, 180));
 		});
 	});
 
 	describe("project", function () {
 		it('projects geo coords into meter coords correctly', function () {
-			expect(crs.project(new L.LatLng(50, 30))).near(new L.Point(3339584.7238, 6446275.84102));
-			expect(crs.project(new L.LatLng(85.0511287798, 180))).near(new L.Point(20037508.34279, 20037508.34278));
-			expect(crs.project(new L.LatLng(-85.0511287798, -180))).near(new L.Point(-20037508.34279, -20037508.34278));
+			expect(crs.project(new Cartographer.LatLng(50, 30))).near(new Cartographer.Point(3339584.7238, 6446275.84102));
+			expect(crs.project(new Cartographer.LatLng(85.0511287798, 180))).near(new Cartographer.Point(20037508.34279, 20037508.34278));
+			expect(crs.project(new Cartographer.LatLng(-85.0511287798, -180))).near(new Cartographer.Point(-20037508.34279, -20037508.34278));
 		});
 	});
 
 	describe("unproject", function () {
 		it('unprojects meter coords into geo coords correctly', function () {
-			expect(crs.unproject(new L.Point(3339584.7238, 6446275.84102))).nearLatLng(new L.LatLng(50, 30));
-			expect(crs.unproject(new L.Point(20037508.34279, 20037508.34278))).nearLatLng(new L.LatLng(85.051129, 180));
-			expect(crs.unproject(new L.Point(-20037508.34279, -20037508.34278))).nearLatLng(new L.LatLng(-85.051129, -180));
+			expect(crs.unproject(new Cartographer.Point(3339584.7238, 6446275.84102))).nearLatLng(new Cartographer.LatLng(50, 30));
+			expect(crs.unproject(new Cartographer.Point(20037508.34279, 20037508.34278))).nearLatLng(new Cartographer.LatLng(85.051129, 180));
+			expect(crs.unproject(new Cartographer.Point(-20037508.34279, -20037508.34278))).nearLatLng(new Cartographer.LatLng(-85.051129, -180));
 		});
 	});
 
@@ -53,31 +53,31 @@ describe("CRS.EPSG3857", function () {
 
 	describe('#wrapLatLng', function () {
 		it("wraps longitude to lie between -180 and 180 by default", function () {
-			expect(crs.wrapLatLng(new L.LatLng(0, 190)).lng).to.eql(-170);
-			expect(crs.wrapLatLng(new L.LatLng(0, 360)).lng).to.eql(0);
-			expect(crs.wrapLatLng(new L.LatLng(0, 380)).lng).to.eql(20);
-			expect(crs.wrapLatLng(new L.LatLng(0, -190)).lng).to.eql(170);
-			expect(crs.wrapLatLng(new L.LatLng(0, -360)).lng).to.eql(0);
-			expect(crs.wrapLatLng(new L.LatLng(0, -380)).lng).to.eql(-20);
-			expect(crs.wrapLatLng(new L.LatLng(0, 90)).lng).to.eql(90);
-			expect(crs.wrapLatLng(new L.LatLng(0, 180)).lng).to.eql(180);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 190)).lng).to.eql(-170);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 360)).lng).to.eql(0);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 380)).lng).to.eql(20);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, -190)).lng).to.eql(170);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, -360)).lng).to.eql(0);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, -380)).lng).to.eql(-20);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 90)).lng).to.eql(90);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 180)).lng).to.eql(180);
 		});
 
 		it("does not drop altitude", function () {
-			expect(crs.wrapLatLng(new L.LatLng(0, 190, 1234)).lng).to.eql(-170);
-			expect(crs.wrapLatLng(new L.LatLng(0, 190, 1234)).alt).to.eql(1234);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 190, 1234)).lng).to.eql(-170);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 190, 1234)).alt).to.eql(1234);
 
-			expect(crs.wrapLatLng(new L.LatLng(0, 380, 1234)).lng).to.eql(20);
-			expect(crs.wrapLatLng(new L.LatLng(0, 380, 1234)).alt).to.eql(1234);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 380, 1234)).lng).to.eql(20);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(0, 380, 1234)).alt).to.eql(1234);
 		});
 	});
 
 	describe('#wrapLatLngBounds', function () {
 		it("does not wrap bounds between -180 and 180 longitude", function () {
 
-			var bounds1 = L.latLngBounds([-10, -10], [10, 10]);
-			var bounds2 = L.latLngBounds([-80, -180], [-70, -170]);
-			var bounds3 = L.latLngBounds([70, 170], [80, 180]);
+			var bounds1 = Cartographer.latLngBounds([-10, -10], [10, 10]);
+			var bounds2 = Cartographer.latLngBounds([-80, -180], [-70, -170]);
+			var bounds3 = Cartographer.latLngBounds([70, 170], [80, 180]);
 
 			bounds1 = crs.wrapLatLngBounds(bounds1);
 			bounds2 = crs.wrapLatLngBounds(bounds2);
@@ -101,8 +101,8 @@ describe("CRS.EPSG3857", function () {
 		});
 
 		it("wraps bounds when center longitude is less than -180", function () {
-			var bounds1 = L.latLngBounds([0, -185], [10, -170]);
-			var bounds2 = L.latLngBounds([0, -190], [10, -175]);
+			var bounds1 = Cartographer.latLngBounds([0, -185], [10, -170]);
+			var bounds2 = Cartographer.latLngBounds([0, -190], [10, -175]);
 
 			bounds1 = crs.wrapLatLngBounds(bounds1);
 			bounds2 = crs.wrapLatLngBounds(bounds2);
@@ -119,8 +119,8 @@ describe("CRS.EPSG3857", function () {
 		});
 
 		it("wraps bounds when center longitude is larger than +180", function () {
-			var bounds1 = L.latLngBounds([0, 185], [10, 170]);
-			var bounds2 = L.latLngBounds([0, 190], [10, 175]);
+			var bounds1 = Cartographer.latLngBounds([0, 185], [10, 170]);
+			var bounds2 = Cartographer.latLngBounds([0, 190], [10, 175]);
 
 			bounds1 = crs.wrapLatLngBounds(bounds1);
 			bounds2 = crs.wrapLatLngBounds(bounds2);
@@ -141,7 +141,7 @@ describe("CRS.EPSG3857", function () {
 });
 
 describe("CRS.EPSG4326", function () {
-	var crs = L.CRS.EPSG4326;
+	var crs = Cartographer.CRS.EPSG4326;
 
 	describe("#getSize", function () {
 		it("gives correct size", function () {
@@ -160,45 +160,45 @@ describe("CRS.EPSG4326", function () {
 });
 
 describe("CRS.EPSG3395", function () {
-	var crs = L.CRS.EPSG3395;
+	var crs = Cartographer.CRS.EPSG3395;
 
 	describe("#latLngToPoint", function () {
 		it("projects a center point", function () {
-			expect(crs.latLngToPoint(L.latLng(0, 0), 0)).near(new L.Point(128, 128), 0.01);
+			expect(crs.latLngToPoint(Cartographer.latLng(0, 0), 0)).near(new Cartographer.Point(128, 128), 0.01);
 		});
 
 		it("projects the northeast corner of the world", function () {
-			expect(crs.latLngToPoint(L.latLng(85.0840591556, 180), 0)).near(new L.Point(256, 0));
+			expect(crs.latLngToPoint(Cartographer.latLng(85.0840591556, 180), 0)).near(new Cartographer.Point(256, 0));
 		});
 	});
 
 	describe("#pointToLatLng", function () {
 		it("reprojects a center point", function () {
-			expect(crs.pointToLatLng(new L.Point(128, 128), 0)).nearLatLng(L.latLng(0, 0), 0.01);
+			expect(crs.pointToLatLng(new Cartographer.Point(128, 128), 0)).nearLatLng(Cartographer.latLng(0, 0), 0.01);
 		});
 
 		it("reprojects the northeast corner of the world", function () {
-			expect(crs.pointToLatLng(new L.Point(256, 0), 0)).nearLatLng(L.latLng(85.0840591556, 180));
+			expect(crs.pointToLatLng(new Cartographer.Point(256, 0), 0)).nearLatLng(Cartographer.latLng(85.0840591556, 180));
 		});
 	});
 });
 
 describe("CRS.Simple", function () {
-	var crs = L.CRS.Simple;
+	var crs = Cartographer.CRS.Simple;
 
 	describe("#latLngToPoint", function () {
 		it("converts LatLng coords to pixels", function () {
-			expect(crs.latLngToPoint(L.latLng(0, 0), 0)).near(new L.Point(0, 0));
-			expect(crs.latLngToPoint(L.latLng(700, 300), 0)).near(new L.Point(300, -700));
-			expect(crs.latLngToPoint(L.latLng(-200, 1000), 1)).near(new L.Point(2000, 400));
+			expect(crs.latLngToPoint(Cartographer.latLng(0, 0), 0)).near(new Cartographer.Point(0, 0));
+			expect(crs.latLngToPoint(Cartographer.latLng(700, 300), 0)).near(new Cartographer.Point(300, -700));
+			expect(crs.latLngToPoint(Cartographer.latLng(-200, 1000), 1)).near(new Cartographer.Point(2000, 400));
 		});
 	});
 
 	describe("#pointToLatLng", function () {
 		it("converts pixels to LatLng coords", function () {
-			expect(crs.pointToLatLng(L.point(0, 0), 0)).nearLatLng(new L.LatLng(0, 0));
-			expect(crs.pointToLatLng(L.point(300, -700), 0)).nearLatLng(new L.LatLng(700, 300));
-			expect(crs.pointToLatLng(L.point(2000, 400), 1)).nearLatLng(new L.LatLng(-200, 1000));
+			expect(crs.pointToLatLng(Cartographer.point(0, 0), 0)).nearLatLng(new Cartographer.LatLng(0, 0));
+			expect(crs.pointToLatLng(Cartographer.point(300, -700), 0)).nearLatLng(new Cartographer.LatLng(700, 300));
+			expect(crs.pointToLatLng(Cartographer.point(2000, 400), 1)).nearLatLng(new Cartographer.LatLng(-200, 1000));
 		});
 	});
 
@@ -210,21 +210,21 @@ describe("CRS.Simple", function () {
 
 	describe("wrapLatLng", function () {
 		it("returns coords as is", function () {
-			expect(crs.wrapLatLng(new L.LatLng(270, 400)).equals(new L.LatLng(270, 400))).to.be(true);
+			expect(crs.wrapLatLng(new Cartographer.LatLng(270, 400)).equals(new Cartographer.LatLng(270, 400))).to.be(true);
 		});
 		it("wraps coords if configured", function () {
-			var crs = L.extend({}, L.CRS.Simple, {
+			var crs = Cartographer.extend({}, Cartographer.CRS.Simple, {
 				wrapLng: [-200, 200],
 				wrapLat: [-200, 200]
 			});
 
-			expect(crs.wrapLatLng(new L.LatLng(300, -250))).nearLatLng(new L.LatLng(-100, 150));
+			expect(crs.wrapLatLng(new Cartographer.LatLng(300, -250))).nearLatLng(new Cartographer.LatLng(-100, 150));
 		});
 	});
 });
 
 describe("CRS", function () {
-	var crs = L.CRS;
+	var crs = Cartographer.CRS;
 
 	describe("#zoom && #scale", function () {
 		it("convert zoom to scale and viceversa and return the same values", function () {
@@ -236,7 +236,7 @@ describe("CRS", function () {
 });
 
 describe("CRS.ZoomNotPowerOfTwo", function () {
-	var crs = L.extend({}, L.CRS, {
+	var crs = Cartographer.extend({}, Cartographer.CRS, {
 		scale: function (zoom) {
 			return 256 * Math.pow(1.5, zoom);
 		},
@@ -269,8 +269,8 @@ describe("CRS.Earth", function () {
 		// we assume using mean earth radius (https://en.wikipedia.org/wiki/Earth_radius#Mean_radius)
 		// is correct, since that's what International Union of Geodesy and Geophysics recommends,
 		// and that sounds serious.
-		var p1 = L.latLng(36.12, -86.67);
-		var p2 = L.latLng(33.94, -118.40);
-		expect(L.CRS.Earth.distance(p1, p2)).to.be.within(2886444.43, 2886444.45);
+		var p1 = Cartographer.latLng(36.12, -86.67);
+		var p2 = Cartographer.latLng(33.94, -118.40);
+		expect(Cartographer.CRS.Earth.distance(p1, p2)).to.be.within(2886444.43, 2886444.45);
 	});
 });

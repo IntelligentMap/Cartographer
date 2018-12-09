@@ -3,7 +3,7 @@ describe('Events', function () {
 	describe('#fireEvent', function () {
 
 		it('fires all listeners added through #addEventListener', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    spy3 = sinon.spy(),
@@ -36,9 +36,9 @@ describe('Events', function () {
 		});
 
 		it('fires all listeners in the order they are added', function () {
-			var obj = new L.Evented(),
-			    ctx1 = new L.Class(),
-			    ctx2 = new L.Class(),
+			var obj = new Cartographer.Evented(),
+			    ctx1 = new Cartographer.Class(),
+			    ctx2 = new Cartographer.Class(),
 			    count = {one: 0, two: 0, three: 0, four: 0};
 
 			function listener1(e) {
@@ -92,10 +92,10 @@ describe('Events', function () {
 		});
 
 		it('provides event object to listeners and executes them in the right context', function () {
-			var obj = new L.Evented(),
-			    obj2 = new L.Evented(),
-			    obj3 = new L.Evented(),
-			    obj4 = new L.Evented(),
+			var obj = new Cartographer.Evented(),
+			    obj2 = new Cartographer.Evented(),
+			    obj3 = new Cartographer.Evented(),
+			    obj4 = new Cartographer.Evented(),
 			    foo = {};
 
 			function listener1(e) {
@@ -138,7 +138,7 @@ describe('Events', function () {
 		});
 
 		it('calls no listeners removed through #removeEventListener', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    spy3 = sinon.spy(),
@@ -176,7 +176,7 @@ describe('Events', function () {
 		});
 
 		it('can handle calls to #removeEventListener on objects with no registered event listeners', function () {
-			var obj = new L.Evented();
+			var obj = new Cartographer.Evented();
 			var removeNonExistentListener = function () {
 				obj.removeEventListener('test');
 			};
@@ -185,12 +185,12 @@ describe('Events', function () {
 
 		// added due to context-sensitive removeListener optimization
 		it('fires multiple listeners with the same context with id', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    foo = {};
 
-			L.Util.stamp(foo);
+			Cartographer.Util.stamp(foo);
 
 			obj.addEventListener('test', spy1, foo);
 			obj.addEventListener('test', spy2, foo);
@@ -202,12 +202,12 @@ describe('Events', function () {
 		});
 
 		it('removes listeners with stamped contexts', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    foo = {};
 
-			L.Util.stamp(foo);
+			Cartographer.Util.stamp(foo);
 
 			obj.addEventListener('test', spy1, foo);
 			obj.addEventListener('test', spy2, foo);
@@ -221,13 +221,13 @@ describe('Events', function () {
 		});
 
 		it('removes listeners with a stamp originally added without one', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    foo = {};
 
 			obj.addEventListener('test', spy1, foo);
-			L.Util.stamp(foo);
+			Cartographer.Util.stamp(foo);
 			obj.addEventListener('test', spy2, foo);
 
 			obj.removeEventListener('test', spy1, foo);
@@ -240,14 +240,14 @@ describe('Events', function () {
 		});
 
 		it('removes listeners with context == this and a stamp originally added without one', function () {
-			var obj = new L.Evented(),
-			    obj2 = new L.Evented(),
+			var obj = new Cartographer.Evented(),
+			    obj2 = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    spy3 = sinon.spy();
 
 			obj.addEventListener('test', spy1, obj);
-			L.Util.stamp(obj);
+			Cartographer.Util.stamp(obj);
 			obj.addEventListener('test', spy2, obj);
 			obj.addEventListener('test', spy3, obj2); // So that there is a contextId based listener, otherwise removeEventListener will do correct behaviour anyway
 
@@ -263,14 +263,14 @@ describe('Events', function () {
 		});
 
 		it('doesnt lose track of listeners when removing non existent ones', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    foo = {},
 			    foo2 = {};
 
-			L.Util.stamp(foo);
-			L.Util.stamp(foo2);
+			Cartographer.Util.stamp(foo);
+			Cartographer.Util.stamp(foo2);
 
 			obj.addEventListener('test', spy, foo2);
 
@@ -285,7 +285,7 @@ describe('Events', function () {
 		});
 
 		it('correctly removes all listeners if given no fn', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    foo = {},
 			    foo2 = {},
@@ -312,7 +312,7 @@ describe('Events', function () {
 		});
 
 		it('makes sure an event is not triggered if a listener is removed during dispatch', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    spy2 = sinon.spy(),
 			    spy3 = sinon.spy(),
@@ -332,7 +332,7 @@ describe('Events', function () {
 		});
 
 		it('makes sure an event is not triggered if all listeners are removed during dispatch', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.addEventListener('test', function () { obj.removeEventListener('test'); });
@@ -343,7 +343,7 @@ describe('Events', function () {
 		});
 
 		it('handles reentrant event firing', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy();
 
@@ -363,7 +363,7 @@ describe('Events', function () {
 		});
 
 		it('can remove an event listener while firing', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			var removeSpy = function () {
@@ -384,7 +384,7 @@ describe('Events', function () {
 	describe('#on, #off & #fire', function () {
 
 		it('works like #addEventListener && #removeEventListener', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.on('test', spy);
@@ -403,7 +403,7 @@ describe('Events', function () {
 			    spy2 = sinon.spy(),
 			    spy3 = sinon.spy();
 
-			var Klass = L.Evented.extend({
+			var Klass = Cartographer.Evented.extend({
 				on: spy1,
 				off: spy2,
 				fire: spy3
@@ -422,7 +422,7 @@ describe('Events', function () {
 		});
 
 		it('does not add twice the same function', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			/* register without context */
@@ -439,8 +439,8 @@ describe('Events', function () {
 	describe("#clearEventListeners", function () {
 		it("clears all registered listeners on an object", function () {
 			var spy = sinon.spy(),
-			    obj = new L.Evented(),
-			    otherObj = new L.Evented();
+			    obj = new Cartographer.Evented(),
+			    otherObj = new Cartographer.Evented();
 
 			obj.on('test', spy, obj);
 			obj.on('testTwo', spy);
@@ -455,7 +455,7 @@ describe('Events', function () {
 
 	describe('#once', function () {
 		it('removes event listeners after first trigger', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.once('test', spy, obj);
@@ -469,7 +469,7 @@ describe('Events', function () {
 		});
 
 		it('works with an object hash', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    otherSpy = sinon.spy();
 
@@ -492,7 +492,7 @@ describe('Events', function () {
 		});
 
 		it("doesn't call listeners to events that have been removed", function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.once('test', spy, obj);
@@ -504,7 +504,7 @@ describe('Events', function () {
 		});
 
 		it('works if called from a context that doesnt implement #Events', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy(),
 			    foo = {};
 
@@ -518,9 +518,9 @@ describe('Events', function () {
 
 	describe('addEventParent && removeEventParent', function () {
 		it('makes the object propagate events with to the given one if fired with propagate=true', function () {
-			var obj = new L.Evented(),
-			    parent1 = new L.Evented(),
-			    parent2 = new L.Evented(),
+			var obj = new Cartographer.Evented(),
+			    parent1 = new Cartographer.Evented(),
+			    parent2 = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy();
 
@@ -548,8 +548,8 @@ describe('Events', function () {
 		});
 
 		it('can fire event where child has no listeners', function () {
-			var obj = new L.Evented(),
-			    parent = new L.Evented(),
+			var obj = new Cartographer.Evented(),
+			    parent = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy();
 
@@ -567,8 +567,8 @@ describe('Events', function () {
 		});
 
 		it('sets target, sourceTarget and layer correctly', function () {
-			var obj = new L.Evented(),
-			    parent = new L.Evented(),
+			var obj = new Cartographer.Evented(),
+			    parent = new Cartographer.Evented(),
 			    spy1 = sinon.spy(),
 			    spy2 = sinon.spy();
 
@@ -600,14 +600,14 @@ describe('Events', function () {
 
 	describe('#listens', function () {
 		it('is false if there is no event handler', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			expect(obj.listens('test')).to.be(false);
 		});
 
 		it('is true if there is an event handler', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.on('test', spy);
@@ -615,7 +615,7 @@ describe('Events', function () {
 		});
 
 		it('is false if event handler has been removed', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.on('test', spy);
@@ -624,7 +624,7 @@ describe('Events', function () {
 		});
 
 		it('changes for a "once" handler', function () {
-			var obj = new L.Evented(),
+			var obj = new Cartographer.Evented(),
 			    spy = sinon.spy();
 
 			obj.once('test', spy);
@@ -635,10 +635,10 @@ describe('Events', function () {
 		});
 	});
 
-	describe('#L.Mixin.Events', function () {
+	describe('#Cartographer.Mixin.Events', function () {
 		it('can be used from includes', function () {
-			var EventClass = L.Class.extend({
-				includes: L.Mixin.Events
+			var EventClass = Cartographer.Class.extend({
+				includes: Cartographer.Mixin.Events
 			});
 			var obj = new EventClass();
 			var spy = sinon.spy();

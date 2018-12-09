@@ -10,7 +10,7 @@ describe('Canvas', function () {
 		c.style.top = '0';
 		c.style.left = '0';
 		document.body.appendChild(c);
-		map = new L.Map(c, {preferCanvas: true, zoomControl: false});
+		map = new Cartographer.Map(c, {preferCanvas: true, zoomControl: false});
 		map.setView([0, 0], 6);
 		p2ll = function (x, y) {
 			return map.layerPointToLatLng([x, y]);
@@ -26,7 +26,7 @@ describe('Canvas', function () {
 		var layer;
 
 		beforeEach(function () {
-			layer = L.polygon(latLngs).addTo(map);
+			layer = Cartographer.polygon(latLngs).addTo(map);
 		});
 
 		afterEach(function () {
@@ -55,17 +55,17 @@ describe('Canvas', function () {
 			var mapSpy = sinon.spy();
 			var layerSpy = sinon.spy();
 			map.on("click", mapSpy);
-			layer.on("click", L.DomEvent.stopPropagation).on("click", layerSpy);
+			layer.on("click", Cartographer.DomEvent.stopPropagation).on("click", layerSpy);
 			happen.at('click', 50, 50);
 			expect(layerSpy.callCount).to.eql(1);
 			expect(mapSpy.callCount).to.eql(0);
 			map.off("click", mapSpy);
-			layer.off("click", L.DomEvent.stopPropagation).off("click", layerSpy);
+			layer.off("click", Cartographer.DomEvent.stopPropagation).off("click", layerSpy);
 		});
 
 		it("DOM events fired on canvas polygon are propagated only once to the map even when two layers contains the event", function () {
 			var spy = sinon.spy();
-			var layer2 = L.polygon(latLngs).addTo(map);
+			var layer2 = Cartographer.polygon(latLngs).addTo(map);
 			map.on("click", spy);
 			happen.at('click', 50, 50);
 			expect(spy.callCount).to.eql(1);
@@ -113,7 +113,7 @@ describe('Canvas', function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// L.Draggable.
+			// Cartographer.Draggable.
 			mouse.moveTo(50, 50, 0)
 				.down().moveBy(20, 10, 200).up();
 		});
@@ -124,7 +124,7 @@ describe('Canvas', function () {
 		var layer;
 
 		beforeEach(function () {
-			layer = L.polygon(latLngs, {interactive: false}).addTo(map);
+			layer = Cartographer.polygon(latLngs, {interactive: false}).addTo(map);
 		});
 
 		afterEach(function () {
@@ -145,12 +145,12 @@ describe('Canvas', function () {
 
 	describe('#dashArray', function () {
 		it('can add polyline with dashArray', function () {
-			var layer = L.polygon(latLngs, {
+			var layer = Cartographer.polygon(latLngs, {
 				dashArray: "5,5"
 			}).addTo(map);
 		});
 		it('can setStyle with dashArray', function () {
-			var layer = L.polygon(latLngs).addTo(map);
+			var layer = Cartographer.polygon(latLngs).addTo(map);
 			layer.setStyle({
 				dashArray: "5,5"
 			});
@@ -158,23 +158,23 @@ describe('Canvas', function () {
 	});
 
 	it('removes vector on next animation frame', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
+		var layer = Cartographer.circle([0, 0]).addTo(map),
+		    layerId = Cartographer.stamp(layer),
 		    canvas = map.getRenderer(layer);
 
 		expect(canvas._layers.hasOwnProperty(layerId)).to.be(true);
 
 		map.removeLayer(layer);
 		// Defer check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
+		Cartographer.Util.requestAnimFrame(function () {
 			expect(canvas._layers.hasOwnProperty(layerId)).to.be(false);
 			done();
 		}, this);
 	});
 
 	it('adds vectors even if they have been removed just before', function (done) {
-		var layer = L.circle([0, 0]).addTo(map),
-		    layerId = L.stamp(layer),
+		var layer = Cartographer.circle([0, 0]).addTo(map),
+		    layerId = Cartographer.stamp(layer),
 		    canvas = map.getRenderer(layer);
 
 		expect(canvas._layers.hasOwnProperty(layerId)).to.be(true);
@@ -183,7 +183,7 @@ describe('Canvas', function () {
 		map.addLayer(layer);
 		expect(canvas._layers.hasOwnProperty(layerId)).to.be(true);
 		// Re-perform a deferred check due to how Canvas renderer manages layer removal.
-		L.Util.requestAnimFrame(function () {
+		Cartographer.Util.requestAnimFrame(function () {
 			expect(canvas._layers.hasOwnProperty(layerId)).to.be(true);
 			done();
 		}, this);
@@ -197,8 +197,8 @@ describe('Canvas', function () {
 			c = document.createElement('div');
 			c.style.width = '400px';
 			c.style.height = '400px';
-			map = new L.Map(c, {preferCanvas: true});
-			map.setView(new L.LatLng(0, 0), 0);
+			map = new Cartographer.Map(c, {preferCanvas: true});
+			map.setView(new Cartographer.LatLng(0, 0), 0);
 			document.body.appendChild(c);
 		});
 
@@ -207,13 +207,13 @@ describe('Canvas', function () {
 		});
 
 		it('is a no-op for layers not on a map', function () {
-			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
 			expect(path.bringToBack()).to.equal(path);
 		});
 
 		it('is a no-op for layers no longer in a LayerGroup', function () {
-			var group = new L.LayerGroup().addTo(map);
-			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
+			var group = new Cartographer.LayerGroup().addTo(map);
+			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
 
 			group.clearLayers();
 
@@ -230,8 +230,8 @@ describe('Canvas', function () {
 			c = document.createElement('div');
 			c.style.width = '400px';
 			c.style.height = '400px';
-			map = new L.Map(c, {preferCanvas: true});
-			map.setView(new L.LatLng(0, 0), 0);
+			map = new Cartographer.Map(c, {preferCanvas: true});
+			map.setView(new Cartographer.LatLng(0, 0), 0);
 			document.body.appendChild(c);
 		});
 
@@ -239,13 +239,13 @@ describe('Canvas', function () {
 			document.body.removeChild(c);
 		});
 		it('is a no-op for layers not on a map', function () {
-			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
 			expect(path.bringToFront()).to.equal(path);
 		});
 
 		it('is a no-op for layers no longer in a LayerGroup', function () {
-			var group = new L.LayerGroup().addTo(map);
-			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
+			var group = new Cartographer.LayerGroup().addTo(map);
+			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
 
 			group.clearLayers();
 
@@ -273,28 +273,28 @@ describe('Canvas remove', function () {
 	});
 
 	function createCanvasMap(c, options) {
-		var map = new L.Map(c, options);
+		var map = new Cartographer.Map(c, options);
 		map.setView([0, 0], 6);
 		var p2ll = function (x, y) {
 			return map.layerPointToLatLng([x, y]);
 		};
 		var latLngs = [p2ll(0, 0), p2ll(0, 100), p2ll(100, 100), p2ll(100, 0)];
-		var layer = L.polygon(latLngs).addTo(map);
+		var layer = Cartographer.polygon(latLngs).addTo(map);
 		return map;
 	}
 
 	it("can remove the map without errors", function (done) {
 		var map1 = createCanvasMap(c, {preferCanvas: true, zoomControl: false});
 		map1.remove();
-		L.Util.requestAnimFrame(function () { done(); });
+		Cartographer.Util.requestAnimFrame(function () { done(); });
 	});
 
 	it("can remove renderer without errors", function (done) {
-		var canvas = L.canvas();
+		var canvas = Cartographer.canvas();
 		var map = createCanvasMap(c, {renderer: canvas, zoomControl: false});
 		canvas.remove();
 		map.remove();
-		L.Util.requestAnimFrame(function () { done(); });
+		Cartographer.Util.requestAnimFrame(function () { done(); });
 	});
 
 });

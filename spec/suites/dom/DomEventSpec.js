@@ -28,8 +28,8 @@ describe('DomEvent', function () {
 			var listener1 = sinon.spy(),
 			    listener2 = sinon.spy();
 
-			L.DomEvent.addListener(el, 'click', listener1);
-			L.DomEvent.addListener(el, 'click', listener2);
+			Cartographer.DomEvent.addListener(el, 'click', listener1);
+			Cartographer.DomEvent.addListener(el, 'click', listener2);
 
 			simulateClick(el);
 
@@ -41,7 +41,7 @@ describe('DomEvent', function () {
 			var obj = {foo: 'bar'},
 			    result;
 
-			L.DomEvent.addListener(el, 'click', function () {
+			Cartographer.DomEvent.addListener(el, 'click', function () {
 				result = this;
 			}, obj);
 
@@ -53,7 +53,7 @@ describe('DomEvent', function () {
 		it('passes an event object to the listener', function () {
 			var type;
 
-			L.DomEvent.addListener(el, 'click', function (e) {
+			Cartographer.DomEvent.addListener(el, 'click', function (e) {
 				type = e && e.type;
 			});
 			simulateClick(el);
@@ -62,7 +62,7 @@ describe('DomEvent', function () {
 		});
 
 		it('is chainable', function () {
-			var res = L.DomEvent.addListener(el, 'click', function () {});
+			var res = Cartographer.DomEvent.addListener(el, 'click', function () {});
 			expect(res.addListener).to.be.a('function');
 		});
 	});
@@ -71,8 +71,8 @@ describe('DomEvent', function () {
 		it('removes a previously added listener', function () {
 			var listener = sinon.spy();
 
-			L.DomEvent.addListener(el, 'click', listener);
-			L.DomEvent.removeListener(el, 'click', listener);
+			Cartographer.DomEvent.addListener(el, 'click', listener);
+			Cartographer.DomEvent.removeListener(el, 'click', listener);
 
 			simulateClick(el);
 
@@ -80,7 +80,7 @@ describe('DomEvent', function () {
 		});
 
 		it('is chainable', function () {
-			var res = L.DomEvent.removeListener(el, 'click', function () {});
+			var res = Cartographer.DomEvent.removeListener(el, 'click', function () {});
 			expect(res.removeListener).to.be.a('function');
 		});
 	});
@@ -92,8 +92,8 @@ describe('DomEvent', function () {
 
 			el.appendChild(child);
 
-			L.DomEvent.addListener(child, 'click', L.DomEvent.stopPropagation);
-			L.DomEvent.addListener(el, 'click', listener);
+			Cartographer.DomEvent.addListener(child, 'click', Cartographer.DomEvent.stopPropagation);
+			Cartographer.DomEvent.addListener(el, 'click', listener);
 
 			simulateClick(child);
 
@@ -104,7 +104,7 @@ describe('DomEvent', function () {
 	});
 	describe('#preventDefault', function () {
 		it('prevents the default action of event', function () {
-			L.DomEvent.addListener(el, 'click', L.DomEvent.preventDefault);
+			Cartographer.DomEvent.addListener(el, 'click', Cartographer.DomEvent.preventDefault);
 
 			expect(simulateClick(el)).to.be(false);
 		});

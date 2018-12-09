@@ -6,7 +6,7 @@ describe("Map.TouchZoom", function () {
 		container.style.position = 'absolute';
 		document.body.appendChild(container);
 
-		var map = new L.Map(container, {
+		var map = new Cartographer.Map(container, {
 			touchZoom: true,
 			inertia: false,
 			zoomAnimation: false	// If true, the test has to wait extra 250msec
@@ -48,7 +48,7 @@ describe("Map.TouchZoom", function () {
 		container.style.position = 'absolute';
 		document.body.appendChild(container);
 
-		var map = new L.Map(container, {
+		var map = new Cartographer.Map(container, {
 			touchZoom: true,
 			inertia: false,
 			zoomAnimation: false	// If true, the test has to wait extra 250msec

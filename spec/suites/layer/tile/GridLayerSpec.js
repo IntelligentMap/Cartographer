@@ -11,7 +11,7 @@ describe('GridLayer', function () {
 
 		document.body.appendChild(div);
 
-		map = L.map(div);
+		map = Cartographer.map(div);
 	});
 
 	afterEach(function () {
@@ -20,22 +20,22 @@ describe('GridLayer', function () {
 
 	describe('#redraw', function () {
 		it('can be called before map.setView', function () {
-			var grid = L.gridLayer().addTo(map);
+			var grid = Cartographer.gridLayer().addTo(map);
 			expect(grid.redraw()).to.equal(grid);
 		});
 	});
 
 	describe('#setOpacity', function () {
 		it('can be called before map.setView', function () {
-			var grid = L.gridLayer().addTo(map);
+			var grid = Cartographer.gridLayer().addTo(map);
 			expect(grid.setOpacity(0.5)).to.equal(grid);
 		});
 
 		it('works when map has fadeAnimated=false (IE8 is exempt)', function (done) {
 			map.remove();
-			map = L.map(div, {fadeAnimation: false}).setView([0, 0], 0);
+			map = Cartographer.map(div, {fadeAnimation: false}).setView([0, 0], 0);
 
-			var grid = L.gridLayer().setOpacity(0.5).addTo(map);
+			var grid = Cartographer.gridLayer().setOpacity(0.5).addTo(map);
 			grid.on('load', function () {
 				expect(grid._container.style.opacity).to.equal('0.5');
 				done();
@@ -49,7 +49,7 @@ describe('GridLayer', function () {
 
 		var tiles = [];
 
-		var grid = L.gridLayer();
+		var grid = Cartographer.gridLayer();
 		grid.createTile = function (coords) {
 			var tile = document.createElement('div');
 			tiles.push({coords: coords, tile: tile});
@@ -62,7 +62,7 @@ describe('GridLayer', function () {
 
 		for (var i = 0; i < tiles.length; i++) {
 			var coords = tiles[i].coords,
-			    pos = L.DomUtil.getPosition(tiles[i].tile);
+			    pos = Cartographer.DomUtil.getPosition(tiles[i].tile);
 
 			loaded[pos.x + ':' + pos.y] = [coords.x, coords.y];
 		}
@@ -92,10 +92,10 @@ describe('GridLayer', function () {
 
 		it('removes tiles for unused zoom levels', function (done) {
 			map.remove();
-			map = L.map(div, {fadeAnimation: false});
+			map = Cartographer.map(div, {fadeAnimation: false});
 			map.setView([0, 0], 1);
 
-			var grid = L.gridLayer();
+			var grid = Cartographer.gridLayer();
 			var tiles = {};
 
 			grid.createTile = function (coords) {
@@ -130,10 +130,10 @@ describe('GridLayer', function () {
 			div.style.height = '512px';
 
 			map.remove();
-			map = L.map(div);
+			map = Cartographer.map(div);
 			map.setView([0, 0], 10);
 
-			grid = L.gridLayer();
+			grid = Cartographer.gridLayer();
 		});
 
 		afterEach(function () {
@@ -203,7 +203,7 @@ describe('GridLayer', function () {
 			it('does not add the .leaflet-tile-loaded class to tile elements', function (done) {
 				var count = 0;
 				grid.on('tileerror', function (e) {
-					if (!L.DomUtil.hasClass(e.tile, 'leaflet-tile-loaded')) {
+					if (!Cartographer.DomUtil.hasClass(e.tile, 'leaflet-tile-loaded')) {
 						count++;
 					}
 					if (keys.length === 4) {
@@ -219,7 +219,7 @@ describe('GridLayer', function () {
 
 	describe("#onAdd", function () {
 		it('is called after zoomend on first map load', function () {
-			var layer = L.gridLayer().addTo(map);
+			var layer = Cartographer.gridLayer().addTo(map);
 
 			var onAdd = layer.onAdd,
 			    onAddSpy = sinon.spy();
@@ -244,7 +244,7 @@ describe('GridLayer', function () {
 
 				map.setView([0, 0], 1);
 
-				L.gridLayer({
+				Cartographer.gridLayer({
 					maxZoom: maxZoom,
 					minZoom: minZoom
 				}).addTo(map);
@@ -258,7 +258,7 @@ describe('GridLayer', function () {
 			it('provides a container', function () {
 				map.setView([0, 0], 1);
 
-				var layer = L.gridLayer().addTo(map);
+				var layer = Cartographer.gridLayer().addTo(map);
 				expect(layer.getContainer()).to.be.ok();
 			});
 		});
@@ -267,20 +267,20 @@ describe('GridLayer', function () {
 			it("has its zoomlevels updated to fit the new layer", function () {
 				map.setView([0, 0], 1);
 
-				L.gridLayer({minZoom: 10, maxZoom: 15}).addTo(map);
+				Cartographer.gridLayer({minZoom: 10, maxZoom: 15}).addTo(map);
 				expect(map.getMinZoom()).to.be(10);
 				expect(map.getMaxZoom()).to.be(15);
 
-				L.gridLayer({minZoom: 5, maxZoom: 10}).addTo(map);
+				Cartographer.gridLayer({minZoom: 5, maxZoom: 10}).addTo(map);
 				expect(map.getMinZoom()).to.be(5);  // changed
 				expect(map.getMaxZoom()).to.be(15); // unchanged
 
-				L.gridLayer({minZoom: 10, maxZoom: 20}).addTo(map);
+				Cartographer.gridLayer({minZoom: 10, maxZoom: 20}).addTo(map);
 				expect(map.getMinZoom()).to.be(5);  // unchanged
 				expect(map.getMaxZoom()).to.be(20); // changed
 
 
-				L.gridLayer({minZoom: 0, maxZoom: 25}).addTo(map);
+				Cartographer.gridLayer({minZoom: 0, maxZoom: 25}).addTo(map);
 				expect(map.getMinZoom()).to.be(0); // changed
 				expect(map.getMaxZoom()).to.be(25); // changed
 			});
@@ -289,10 +289,10 @@ describe('GridLayer', function () {
 		describe("when a gridlayer is removed from a map", function () {
 			it("has its zoomlevels updated to only fit the layers it currently has", function () {
 				var tiles = [
-					L.gridLayer({minZoom: 10, maxZoom: 15}).addTo(map),
-					L.gridLayer({minZoom: 5, maxZoom: 10}).addTo(map),
-					L.gridLayer({minZoom: 10, maxZoom: 20}).addTo(map),
-					L.gridLayer({minZoom: 0, maxZoom: 25}).addTo(map)
+					Cartographer.gridLayer({minZoom: 10, maxZoom: 15}).addTo(map),
+					Cartographer.gridLayer({minZoom: 5, maxZoom: 10}).addTo(map),
+					Cartographer.gridLayer({minZoom: 10, maxZoom: 20}).addTo(map),
+					Cartographer.gridLayer({minZoom: 0, maxZoom: 25}).addTo(map)
 				];
 				map.whenReady(function () {
 					expect(map.getMinZoom()).to.be(0);
@@ -323,7 +323,7 @@ describe('GridLayer', function () {
 		it("calls createTile() with maxNativeZoom when map zoom is larger", function (done) {
 			map.setView([0, 0], 10);
 
-			var grid = L.gridLayer({
+			var grid = Cartographer.gridLayer({
 				maxNativeZoom: 5
 			});
 			var tileCount = 0;
@@ -347,7 +347,7 @@ describe('GridLayer', function () {
 		it("calls createTile() with minNativeZoom when map zoom is smaller", function (done) {
 			map.setView([0, 0], 3);
 
-			var grid = L.gridLayer({
+			var grid = Cartographer.gridLayer({
 				minNativeZoom: 5
 			});
 			var tileCount = 0;
@@ -375,9 +375,9 @@ describe('GridLayer', function () {
 		beforeEach(function () {
 			clock = sinon.useFakeTimers();
 
-			grid = L.gridLayer({
+			grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256)
+				tileSize: Cartographer.point(256, 256)
 			});
 
 			grid.createTile = function (coords) {
@@ -537,9 +537,9 @@ describe('GridLayer', function () {
 		beforeEach(function () {
 			clock = sinon.useFakeTimers();
 
-			grid = L.gridLayer({
+			grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256)
+				tileSize: Cartographer.point(256, 256)
 			});
 
 			grid.createTile = function (coords) {
@@ -588,10 +588,10 @@ describe('GridLayer', function () {
 				return function () {
 					clock.tick(40); // 40msec/frame ~= 25fps
 					map.fire('_frame');
-					L.Util.requestAnimFrame(_runFrames(n - 1));
+					Cartographer.Util.requestAnimFrame(_runFrames(n - 1));
 				};
 			} else {
-				return L.Util.falseFn;
+				return Cartographer.Util.falseFn;
 			}
 		}
 
@@ -613,7 +613,7 @@ describe('GridLayer', function () {
 				expect(counts.tileunload).to.be(0);
 
 				// Wait for a frame to let _updateOpacity starting.
-				L.Util.requestAnimFrame(function () {
+				Cartographer.Util.requestAnimFrame(function () {
 					// Wait > 250msec for the tile fade-in animation to complete,
 					// which triggers the tile pruning
 					clock.tick(300);
@@ -650,7 +650,7 @@ describe('GridLayer', function () {
 						// so the remaining 4 tiles from z10 can then be pruned.
 						// However we have skipped any pruning from _updateOpacity,
 						// so we will have to rely on the setTimeout from _tileReady.
-						L.Util.requestAnimFrame(function () {
+						Cartographer.Util.requestAnimFrame(function () {
 							// Wait > 250msec for the tile fade-in animation to complete,
 							// which triggers the tile pruning
 							clock.tick(300);
@@ -664,7 +664,7 @@ describe('GridLayer', function () {
 
 					map.setZoom(11, {animate: true});
 					// Animation (and new tiles loading) starts after 1 frame.
-					L.Util.requestAnimFrame(function () {
+					Cartographer.Util.requestAnimFrame(function () {
 						// 16 extra tiles from z11 being loaded. Total 16 + 16 = 32.
 						expect(counts.tileloadstart).to.be(32);
 					});
@@ -690,7 +690,7 @@ describe('GridLayer', function () {
 
 					// In this particular scenario, the tile unloads happen in the
 					// next render frame after the grid's 'load' event.
-					L.Util.requestAnimFrame(function () {
+					Cartographer.Util.requestAnimFrame(function () {
 						expect(counts.tileloadstart).to.be(32);
 						expect(counts.tileload).to.be(32);
 						expect(counts.tileunload).to.be(16);
@@ -721,7 +721,7 @@ describe('GridLayer', function () {
 				expect(counts.tileunload).to.be(0);
 
 				// Wait for a frame to let _updateOpacity starting.
-				L.Util.requestAnimFrame(function () {
+				Cartographer.Util.requestAnimFrame(function () {
 					// Wait > 250msec for the tile fade-in animation to complete,
 					// which triggers the tile pruning
 					clock.tick(300);
@@ -758,7 +758,7 @@ describe('GridLayer', function () {
 							// Wait for a frame for next _updateOpacity to prune
 							// all 16 tiles from z11 which are now covered by the
 							// 4 central active tiles of z10.
-							L.Util.requestAnimFrame(function () {
+							Cartographer.Util.requestAnimFrame(function () {
 								expect(counts.tileunload).to.be(16);
 								done();
 							});
@@ -768,7 +768,7 @@ describe('GridLayer', function () {
 
 				map.setZoom(10, {animate: true});
 				// Animation (and new tiles loading) starts after 1 frame.
-				L.Util.requestAnimFrame(function () {
+				Cartographer.Util.requestAnimFrame(function () {
 					// We're one frame into the zoom animation, there are
 					// 16 tiles for z11 plus 4 tiles for z10 covering the
 					// bounds at the *beginning* of the zoom-*out* anim
@@ -794,7 +794,7 @@ describe('GridLayer', function () {
 
 					// In this particular scenario, the tile unloads happen in the
 					// next render frame after the grid's 'load' event.
-					L.Util.requestAnimFrame(function () {
+					Cartographer.Util.requestAnimFrame(function () {
 						expect(counts.tileloadstart).to.be(32);
 						expect(counts.tileload).to.be(32);
 						expect(counts.tileunload).to.be(16);
@@ -855,9 +855,9 @@ describe('GridLayer', function () {
 		beforeEach(function () {
 			clock = sinon.useFakeTimers();
 
-			grid = L.gridLayer({
+			grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256)
+				tileSize: Cartographer.point(256, 256)
 			});
 
 			grid.createTile = function (coords) {
@@ -907,7 +907,7 @@ describe('GridLayer', function () {
 				expect(counts.tileunload).to.be(0);
 
 				// Wait for a frame to let _updateOpacity starting.
-				L.Util.requestAnimFrame(function () {
+				Cartographer.Util.requestAnimFrame(function () {
 
 					// Wait > 250msec for the tile fade-in animation to complete,
 					// which triggers the tile pruning
@@ -927,7 +927,7 @@ describe('GridLayer', function () {
 						// PhantomJS has Browser.any3d === false, so it actually
 						// does not perform the fade animation and does not need
 						// this rAF, but it does not harm either.
-						L.Util.requestAnimFrame(function () {
+						Cartographer.Util.requestAnimFrame(function () {
 							expect(counts.tileunload).to.be(12);
 							done();
 						});
@@ -973,7 +973,7 @@ describe('GridLayer', function () {
 					// PhantomJS has Browser.any3d === false, so it actually
 					// does not perform the fade animation and does not need
 					// this rAF, but it does not harm either.
-					L.Util.requestAnimFrame(function () {
+					Cartographer.Util.requestAnimFrame(function () {
 						expect(counts.tileunload).to.be(12);
 
 						grid.once('load', function () {
@@ -981,7 +981,7 @@ describe('GridLayer', function () {
 							expect(counts.tileload).to.be(40);
 
 							// Wait an extra frame for the tile pruning to happen.
-							L.Util.requestAnimFrame(function () {
+							Cartographer.Util.requestAnimFrame(function () {
 								expect(counts.tileunload).to.be(24);
 								done();
 							});
@@ -1039,9 +1039,9 @@ describe('GridLayer', function () {
 	describe("nowrap option", function () {
 		it("When false, uses same coords at zoom 0 for all tiles", function (done) {
 
-			var grid = L.gridLayer({
+			var grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256),
+				tileSize: Cartographer.point(256, 256),
 				noWrap: false
 			});
 			var loadedTileKeys = [];
@@ -1061,9 +1061,9 @@ describe('GridLayer', function () {
 
 		it("When true, uses different coords at zoom level 0 for all tiles", function (done) {
 
-			var grid = L.gridLayer({
+			var grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256),
+				tileSize: Cartographer.point(256, 256),
 				noWrap: true
 			});
 			var loadedTileKeys = [];
@@ -1083,9 +1083,9 @@ describe('GridLayer', function () {
 
 		it("When true and with bounds, loads just one tile at zoom level 0", function (done) {
 
-			var grid = L.gridLayer({
+			var grid = Cartographer.gridLayer({
 				attribution: 'Grid Layer',
-				tileSize: L.point(256, 256),
+				tileSize: Cartographer.point(256, 256),
 				bounds: [[-90, -180], [90, 180]],
 				noWrap: true
 			});
@@ -1109,21 +1109,21 @@ describe('GridLayer', function () {
 		it("Throws error on map center at plus Infinity longitude", function () {
 			expect(function () {
 				map.setCenter([Infinity, Infinity]);
-				L.gridLayer().addTo(map);
+				Cartographer.gridLayer().addTo(map);
 			}).to.throwError('Attempted to load an infinite number of tiles');
 		});
 
 		it("Throws error on map center at minus Infinity longitude", function () {
 			expect(function () {
 				map.setCenter([-Infinity, -Infinity]);
-				L.gridLayer().addTo(map);
+				Cartographer.gridLayer().addTo(map);
 			}).to.throwError('Attempted to load an infinite number of tiles');
 		});
 	});
 
 	it("doesn't call map's getZoomScale method with null after _invalidateAll method was called", function () {
 		map.setView([0, 0], 0);
-		var grid = L.gridLayer().addTo(map);
+		var grid = Cartographer.gridLayer().addTo(map);
 		var wrapped = sinon.spy(map, 'getZoomScale');
 		grid._invalidateAll();
 		grid.redraw();

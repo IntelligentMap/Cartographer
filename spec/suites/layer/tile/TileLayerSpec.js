@@ -169,7 +169,7 @@ describe('TileLayer', function () {
 
 		document.body.appendChild(div);
 
-		map = L.map(div);
+		map = Cartographer.map(div);
 	});
 
 	afterEach(function () {
@@ -179,7 +179,7 @@ describe('TileLayer', function () {
 	});
 
 	function kittenLayerFactory(options) {
-		return L.tileLayer(placeKitten, options || {});
+		return Cartographer.tileLayer(placeKitten, options || {});
 	}
 
 	function eachImg(layer, callback) {
@@ -205,10 +205,10 @@ describe('TileLayer', function () {
 				return function () {
 					clock.tick(40); // 40msec/frame ~= 25fps
 					map.fire('_frame');
-					L.Util.requestAnimFrame(_runFrames(n - 1));
+					Cartographer.Util.requestAnimFrame(_runFrames(n - 1));
 				};
 			} else {
-				return L.Util.falseFn;
+				return Cartographer.Util.falseFn;
 			}
 		}
 
@@ -307,11 +307,11 @@ describe('TileLayer', function () {
 
 			document.body.appendChild(div);
 
-			map = L.map(div).setView([0, 0], 2);
+			map = Cartographer.map(div).setView([0, 0], 2);
 		});
 
 		it('replaces {y} with y coordinate', function () {
-			var layer = L.tileLayer('http://example.com/{z}/{y}/{x}.png').addTo(map);
+			var layer = Cartographer.tileLayer('http://example.com/{z}/{y}/{x}.png').addTo(map);
 
 			var urls = [
 				'http://example.com/2/1/1.png',
@@ -328,7 +328,7 @@ describe('TileLayer', function () {
 		});
 
 		it('replaces {-y} with inverse y coordinate', function () {
-			var layer = L.tileLayer('http://example.com/{z}/{-y}/{x}.png').addTo(map);
+			var layer = Cartographer.tileLayer('http://example.com/{z}/{-y}/{x}.png').addTo(map);
 			var urls = [
 				'http://example.com/2/2/1.png',
 				'http://example.com/2/2/2.png',
@@ -349,10 +349,10 @@ describe('TileLayer', function () {
 			simplediv.style.visibility = 'hidden';
 
 			document.body.appendChild(simplediv);
-			var simpleMap = L.map(simplediv, {
-				crs: L.CRS.Simple
+			var simpleMap = Cartographer.map(simplediv, {
+				crs: Cartographer.CRS.Simple
 			}).setView([0, 0], 5);
-			var layer = L.tileLayer('http://example.com/{z}/{-y}/{x}.png');
+			var layer = Cartographer.tileLayer('http://example.com/{z}/{-y}/{x}.png');
 
 			expect(function () {
 				layer.addTo(simpleMap);
@@ -363,7 +363,7 @@ describe('TileLayer', function () {
 		});
 
 		it('replaces {s} with [abc] by default', function () {
-			var layer = L.tileLayer('http://{s}.example.com/{z}/{-y}/{x}.png').addTo(map);
+			var layer = Cartographer.tileLayer('http://{s}.example.com/{z}/{-y}/{x}.png').addTo(map);
 
 			eachImg(layer, function (img) {
 				expect(['a', 'b', 'c'].indexOf(img.src[7]) >= 0).to.eql(true);
@@ -371,7 +371,7 @@ describe('TileLayer', function () {
 		});
 
 		it('replaces {s} with specified prefixes', function () {
-			var layer = L.tileLayer('http://{s}.example.com/{z}/{-y}/{x}.png', {
+			var layer = Cartographer.tileLayer('http://{s}.example.com/{z}/{-y}/{x}.png', {
 				subdomains: 'qrs'
 			}).addTo(map);
 
@@ -382,8 +382,8 @@ describe('TileLayer', function () {
 
 		it('uses zoomOffset option', function () {
 			// Map view is set at zoom 2 in beforeEach.
-			var layer = L.tileLayer('http://example.com/{z}/{y}/{x}.png', {
-				zoomOffset: 1 // => zoom 2 + zoomOffset 1 => z 3 in URL.
+			var layer = Cartographer.tileLayer('http://example.com/{z}/{y}/{x}.png', {
+				zoomOffset: 1 // => zoom 2 + zoomOffset 1 => z 3 in URCartographer.
 			}).addTo(map);
 
 			var urls = [
@@ -402,8 +402,8 @@ describe('TileLayer', function () {
 
 		it('uses negative zoomOffset option', function () {
 			// Map view is set at zoom 2 in beforeEach.
-			var layer = L.tileLayer('http://example.com/{z}/{y}/{x}.png', {
-				zoomOffset: -3 // => zoom 2 + zoomOffset -3 => z -1 in URL.
+			var layer = Cartographer.tileLayer('http://example.com/{z}/{y}/{x}.png', {
+				zoomOffset: -3 // => zoom 2 + zoomOffset -3 => z -1 in URCartographer.
 			}).addTo(map);
 
 			var urls = [
@@ -429,7 +429,7 @@ describe('TileLayer', function () {
 			div.style.width = '400px';
 			div.style.height = '400px';
 
-			map = L.map(div).setView([0, 0], 2);
+			map = Cartographer.map(div).setView([0, 0], 2);
 		});
 
 		afterEach(function () {
@@ -446,7 +446,7 @@ describe('TileLayer', function () {
 
 		function testCrossOriginValue(crossOrigin, expectedValue) {
 			it('uses crossOrigin value ' + crossOrigin, function () {
-				var layer = L.tileLayer('http://example.com/{z}/{y}/{x}.png', {
+				var layer = Cartographer.tileLayer('http://example.com/{z}/{y}/{x}.png', {
 					crossOrigin: crossOrigin
 				}).addTo(map);
 
@@ -459,7 +459,7 @@ describe('TileLayer', function () {
 
 	describe('#setUrl', function () {
 		it('fires only one load event', function (done) {
-			var layer = L.tileLayer(placeKitten).addTo(map);
+			var layer = Cartographer.tileLayer(placeKitten).addTo(map);
 			var counts = {
 				load: 0,
 				tileload: 0
