@@ -30,4 +30,3 @@ after_success:
   - NAME=$TRAVIS_BRANCH
   - '[[ $TRAVIS_PULL_REQUEST != ''false'' ]] && NAME=$TRAVIS_PULL_REQUEST'
   - '[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG'
-  - "curl -i -X POST -H \"Content-Type: multipart/form-data\" -F \"branch=$TRAVIS_BRANCH\" -F \"commit=$TRAVIS_COMMIT\" -F \"file=@dist/cartographer.zip\" http://cartographer.blobs.oopscommand.com/upload.php"
