@@ -2,7 +2,7 @@ describe("Map.Drag", function () {
 	describe("#addHook", function () {
 		it("calls the map with dragging enabled", function () {
 			var container = document.createElement('div');
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true
 			});
 
@@ -12,7 +12,7 @@ describe("Map.Drag", function () {
 		});
 		it("calls the map with dragging and worldCopyJump enabled", function () {
 			var container = document.createElement('div');
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				worldCopyJump: true
 			});
@@ -24,7 +24,7 @@ describe("Map.Drag", function () {
 		it("calls the map with dragging disabled and worldCopyJump enabled; " +
 			"enables dragging after setting center and zoom", function () {
 			var container = document.createElement('div');
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: false,
 				worldCopyJump: true
 			});
@@ -53,7 +53,7 @@ describe("Map.Drag", function () {
 		});
 
 		it("change the center of the map", function (done) {
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
@@ -74,7 +74,7 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			mouse.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(5, 0, 20).moveBy(256, 32, 200).up();
 		});
@@ -94,7 +94,7 @@ describe("Map.Drag", function () {
 			});
 
 			it("change the center of the map, compensating for CSS scale", function (done) {
-				var map = new Cartographer.Map(container, {
+				var map = new L.Map(container, {
 				    dragging: true,
 				    inertia: false
 				});
@@ -115,19 +115,19 @@ describe("Map.Drag", function () {
 				var mouse = hand.growFinger('mouse');
 
 				// We move 5 pixels first to overcome the 3-pixel threshold of
-				// Cartographer.Draggable.
+				// L.Draggable.
 				mouse.wait(100).moveTo(200, 200, 0)
 					.down().moveBy(5, 0, 20).moveBy(scaleX * 256, scaleY * 32, 200).up();
 			});
 		});
 
 		it("does not change the center of the map when mouse is moved less than the drag threshold", function (done) {
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
 
-			var originalCenter = Cartographer.latLng(0, 0);
+			var originalCenter = L.latLng(0, 0);
 			map.setView(originalCenter, 1);
 
 			var spy = sinon.spy();
@@ -148,13 +148,13 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 2 pixels to stay below the default 3-pixel threshold of
-			// Cartographer.Draggable. This should result in a click and not a drag.
+			// L.Draggable. This should result in a click and not a drag.
 			mouse.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(1, 0, 20).moveBy(1, 0, 200).up();
 		});
 
 		it("does not trigger preclick nor click", function (done) {
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
@@ -181,18 +181,18 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			mouse.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(5, 0, 20).moveBy(256, 32, 200).up();
 		});
 
 		it("does not trigger preclick nor click when dragging on top of a static marker", function (done) {
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
 			map.setView([0, 0], 1);
-			var marker = Cartographer.marker(map.getCenter()).addTo(map);
+			var marker = L.marker(map.getCenter()).addTo(map);
 			var clickSpy = sinon.spy();
 			var preclickSpy = sinon.spy();
 			var markerDragSpy = sinon.spy();
@@ -220,18 +220,18 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			mouse.moveTo(300, 280, 0)
 				.down().moveBy(5, 0, 20).moveBy(20, 20, 100).up();
 		});
 
 		it("does not trigger preclick nor click when dragging a marker", function (done) {
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
 			map.setView([0, 0], 1);
-			var marker = Cartographer.marker(map.getCenter(), {draggable: true}).addTo(map);
+			var marker = L.marker(map.getCenter(), {draggable: true}).addTo(map);
 			var clickSpy = sinon.spy();
 			var preclickSpy = sinon.spy();
 			var markerDragSpy = sinon.spy();
@@ -259,7 +259,7 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			mouse.moveTo(300, 280, 0)
 				.down().moveBy(5, 0, 20).moveBy(50, 50, 100).up();
 		});
@@ -272,11 +272,11 @@ describe("Map.Drag", function () {
 
 			document.body.appendChild(container);
 
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
-			var originalCenter = Cartographer.latLng(0, 0);
+			var originalCenter = L.latLng(0, 0);
 			map.setView(originalCenter, 1);
 
 			map.on('mousedown', function () {
@@ -301,7 +301,7 @@ describe("Map.Drag", function () {
 			var mouse = hand.growFinger('mouse');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			mouse.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(5, 0, 20).moveBy(256, 32, 200).up();
 		});
@@ -318,7 +318,7 @@ describe("Map.Drag", function () {
 
 			document.body.appendChild(container);
 
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
@@ -340,7 +340,7 @@ describe("Map.Drag", function () {
 			var toucher = hand.growFinger('touch');
 
 			// We move 5 pixels first to overcome the 3-pixel threshold of
-			// Cartographer.Draggable.
+			// L.Draggable.
 			toucher.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(5, 0, 20).moveBy(256, 32, 200).up();
 		});
@@ -353,12 +353,12 @@ describe("Map.Drag", function () {
 
 			document.body.appendChild(container);
 
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false
 			});
 
-			var originalCenter = Cartographer.latLng(0, 0);
+			var originalCenter = L.latLng(0, 0);
 			map.setView(originalCenter, 1);
 
 			var spy = sinon.spy();
@@ -381,7 +381,7 @@ describe("Map.Drag", function () {
 			var toucher = hand.growFinger('touch');
 
 			// We move 2 pixels to stay below the default 3-pixel threshold of
-			// Cartographer.Draggable. This should result in a click and not a drag.
+			// L.Draggable. This should result in a click and not a drag.
 			toucher.wait(100).moveTo(200, 200, 0)
 				.down().moveBy(1, 0, 20).moveBy(1, 0, 200).up();
 		});
@@ -393,7 +393,7 @@ describe("Map.Drag", function () {
 			container.style.top = container.style.left = 0;
 			container.style.position = 'absolute';
 			document.body.appendChild(container);
-			var map = new Cartographer.Map(container, {
+			var map = new L.Map(container, {
 				dragging: true,
 				inertia: false,
 				zoomAnimation: false	// If true, the test has to wait extra 250msec

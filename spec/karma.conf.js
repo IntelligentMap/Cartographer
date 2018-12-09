@@ -65,7 +65,7 @@ module.exports = function (config) {
 				json()
 			],
 			format: 'umd',
-			name: 'Cartographer',
+			name: 'L',
 			outro: outro
 		},
 

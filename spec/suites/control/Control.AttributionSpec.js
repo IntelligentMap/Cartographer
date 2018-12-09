@@ -3,8 +3,8 @@ describe("Control.Attribution", function () {
 	var map, control, container;
 
 	beforeEach(function () {
-		map = Cartographer.map(document.createElement('div'));
-		control = new Cartographer.Control.Attribution({
+		map = L.map(document.createElement('div'));
+		control = new L.Control.Attribution({
 			prefix: 'prefix'
 		}).addTo(map);
 		map.setView([0, 0], 1);
@@ -12,7 +12,7 @@ describe("Control.Attribution", function () {
 	});
 
 	function dummyLayer() {
-		var layer = new Cartographer.Layer();
+		var layer = new L.Layer();
 		layer.onAdd = function () { };
 		layer.onRemove = function () { };
 		return layer;
@@ -69,7 +69,7 @@ describe("Control.Attribution", function () {
 	describe('control.attribution factory', function () {
 		it('creates Control.Attribution instance', function () {
 			var options = {prefix: 'prefix'};
-			expect(Cartographer.control.attribution(options)).to.eql(new Cartographer.Control.Attribution(options));
+			expect(L.control.attribution(options)).to.eql(new L.Control.Attribution(options));
 		});
 	});
 

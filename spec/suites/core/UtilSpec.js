@@ -11,7 +11,7 @@ describe('Util', function () {
 		});
 
 		it('extends the first argument with the properties of the second', function () {
-			Cartographer.Util.extend(a, {
+			L.Util.extend(a, {
 				bar: 7,
 				baz: 3
 			});
@@ -24,7 +24,7 @@ describe('Util', function () {
 		});
 
 		it('accepts more than 2 arguments', function () {
-			Cartographer.Util.extend(a, {bar: 7}, {baz: 3});
+			L.Util.extend(a, {bar: 7}, {baz: 3});
 
 			expect(a).to.eql({
 				foo: 5,
@@ -40,7 +40,7 @@ describe('Util', function () {
 				return this;
 			};
 
-			var fn2 = Cartographer.Util.bind(fn, {foo: 'bar'});
+			var fn2 = L.Util.bind(fn, {foo: 'bar'});
 
 			expect(fn2()).to.eql({foo: 'bar'});
 		});
@@ -52,7 +52,7 @@ describe('Util', function () {
 			    b = {},
 			    c = {};
 
-			var fn2 = Cartographer.Util.bind(fn, foo, a, b);
+			var fn2 = L.Util.bind(fn, foo, a, b);
 
 			fn2(c);
 
@@ -63,13 +63,13 @@ describe('Util', function () {
 	describe('#stamp', function () {
 		it('sets a unique id on the given object and returns it', function () {
 			var a = {},
-			    id = Cartographer.Util.stamp(a);
+			    id = L.Util.stamp(a);
 
 			expect(typeof id).to.eql('number');
-			expect(Cartographer.Util.stamp(a)).to.eql(id);
+			expect(L.Util.stamp(a)).to.eql(id);
 
 			var b = {},
-			    id2 = Cartographer.Util.stamp(b);
+			    id2 = L.Util.stamp(b);
 
 			expect(id2).not.to.eql(id);
 		});
@@ -77,15 +77,15 @@ describe('Util', function () {
 
 	describe('#falseFn', function () {
 		it('returns false', function () {
-			expect(Cartographer.Util.falseFn()).to.be(false);
+			expect(L.Util.falseFn()).to.be(false);
 		});
 	});
 
 	describe('#formatNum', function () {
 		it('formats numbers with a given precision', function () {
-			expect(Cartographer.Util.formatNum(13.12325555, 3)).to.eql(13.123);
-			expect(Cartographer.Util.formatNum(13.12325555)).to.eql(13.123256);
-			expect(Cartographer.Util.formatNum(13.12325555, 0)).to.eql(13);
+			expect(L.Util.formatNum(13.12325555, 3)).to.eql(13.123);
+			expect(L.Util.formatNum(13.12325555)).to.eql(13.123256);
+			expect(L.Util.formatNum(13.12325555, 0)).to.eql(13);
 		});
 	});
 
@@ -98,7 +98,7 @@ describe('Util', function () {
 				result: '?bar=7&baz=3'
 			};
 
-			expect(Cartographer.Util.getParamString(a.obj, a.url)).to.eql(a.result);
+			expect(L.Util.getParamString(a.obj, a.url)).to.eql(a.result);
 
 			var b = {
 				url: 'http://example.com/get?justone=qs',
@@ -106,7 +106,7 @@ describe('Util', function () {
 				result: '&bar=7&baz=3'
 			};
 
-			expect(Cartographer.Util.getParamString(b.obj, b.url)).to.eql(b.result);
+			expect(L.Util.getParamString(b.obj, b.url)).to.eql(b.result);
 
 			var c = {
 				url: undefined,
@@ -114,7 +114,7 @@ describe('Util', function () {
 				result: '?bar=7&baz=3'
 			};
 
-			expect(Cartographer.Util.getParamString(c.obj, c.url)).to.eql(c.result);
+			expect(L.Util.getParamString(c.obj, c.url)).to.eql(c.result);
 		});
 	});
 
@@ -123,14 +123,14 @@ describe('Util', function () {
 			var spy = sinon.spy(),
 			    foo = {};
 
-			Cartographer.Util.requestAnimFrame(spy);
+			L.Util.requestAnimFrame(spy);
 
-			Cartographer.Util.requestAnimFrame(function () {
+			L.Util.requestAnimFrame(function () {
 				expect(this).to.eql(foo);
 				done();
 			}, foo);
 
-			Cartographer.Util.cancelAnimFrame(spy);
+			L.Util.cancelAnimFrame(spy);
 		});
 	});
 
@@ -138,7 +138,7 @@ describe('Util', function () {
 		it('limits execution to not more often than specified time interval', function (done) {
 			var spy = sinon.spy();
 
-			var fn = Cartographer.Util.throttle(spy, 20);
+			var fn = L.Util.throttle(spy, 20);
 
 			fn();
 			fn();
@@ -155,47 +155,47 @@ describe('Util', function () {
 
 	describe('#splitWords', function () {
 		it('splits words into an array', function () {
-			expect(Cartographer.Util.splitWords('foo bar baz')).to.eql(['foo', 'bar', 'baz']);
+			expect(L.Util.splitWords('foo bar baz')).to.eql(['foo', 'bar', 'baz']);
 		});
 	});
 
 	describe('#setOptions', function () {
 		it('sets specified options on object', function () {
 			var o = {};
-			Cartographer.Util.setOptions(o, {foo: 'bar'});
+			L.Util.setOptions(o, {foo: 'bar'});
 			expect(o.options.foo).to.eql('bar');
 		});
 
 		it('returns options', function () {
 			var o = {};
-			var r = Cartographer.Util.setOptions(o, {foo: 'bar'});
+			var r = L.Util.setOptions(o, {foo: 'bar'});
 			expect(r).to.equal(o.options);
 		});
 
 		it('accepts undefined', function () {
 			var o = {};
-			Cartographer.Util.setOptions(o, undefined);
+			L.Util.setOptions(o, undefined);
 			expect(o.options).to.eql({});
 		});
 
 		it('creates a distinct options object', function () {
 			var opts = {},
-			    o = Cartographer.Util.create({options: opts});
-			Cartographer.Util.setOptions(o, {});
+			    o = L.Util.create({options: opts});
+			L.Util.setOptions(o, {});
 			expect(o.options).not.to.equal(opts);
 		});
 
 		it("doesn't create a distinct options object if object already has own options", function () {
 			var opts = {},
 			    o = {options: opts};
-			Cartographer.Util.setOptions(o, {});
+			L.Util.setOptions(o, {});
 			expect(o.options).to.equal(opts);
 		});
 
 		it('inherits options prototypally', function () {
 			var opts = {},
-			    o = Cartographer.Util.create({options: opts});
-			Cartographer.Util.setOptions(o, {});
+			    o = L.Util.create({options: opts});
+			L.Util.setOptions(o, {});
 			opts.foo = 'bar';
 			expect(o.options.foo).to.eql('bar');
 		});
@@ -205,7 +205,7 @@ describe('Util', function () {
 		it('evaluates templates with a given data object', function () {
 			var tpl = 'Hello {foo} and {bar}!';
 
-			var str = Cartographer.Util.template(tpl, {
+			var str = L.Util.template(tpl, {
 				foo: 'Vlad',
 				bar: 'Dave'
 			});
@@ -214,32 +214,32 @@ describe('Util', function () {
 		});
 
 		it('does not modify text without a token variable', function () {
-			expect(Cartographer.Util.template('foo', {})).to.eql('foo');
+			expect(L.Util.template('foo', {})).to.eql('foo');
 		});
 
 		it('supports templates with double quotes', function () {
-			expect(Cartographer.Util.template('He said: "{foo}"!', {
+			expect(L.Util.template('He said: "{foo}"!', {
 				foo: 'Hello'
 			})).to.eql('He said: "Hello"!');
 		});
 
 		it('throws when a template token is not given', function () {
 			expect(function () {
-				Cartographer.Util.template(undefined, {foo: 'bar'});
+				L.Util.template(undefined, {foo: 'bar'});
 			}).to.throwError();
 		});
 
 		it('allows underscores and dashes in placeholders', function () {
-			expect(Cartographer.Util.template('{nice_stuff}', {'nice_stuff': 'foo'})).to.eql('foo');
-			expect(Cartographer.Util.template('{-y}', {'-y': 1})).to.eql('1');
+			expect(L.Util.template('{nice_stuff}', {'nice_stuff': 'foo'})).to.eql('foo');
+			expect(L.Util.template('{-y}', {'-y': 1})).to.eql('1');
 		});
 	});
 
 	describe('#isArray', function () {
-		expect(Cartographer.Util.isArray([1, 2, 3])).to.be(true);
+		expect(L.Util.isArray([1, 2, 3])).to.be(true);
 		/* eslint no-array-constructor: 0 */
-		expect(Cartographer.Util.isArray(new Array(1, 2, 3))).to.be(true);
-		expect(Cartographer.Util.isArray('blabla')).to.be(false);
-		expect(Cartographer.Util.isArray({0: 1, 1: 2})).to.be(false);
+		expect(L.Util.isArray(new Array(1, 2, 3))).to.be(true);
+		expect(L.Util.isArray('blabla')).to.be(false);
+		expect(L.Util.isArray({0: 1, 1: 2})).to.be(false);
 	});
 });

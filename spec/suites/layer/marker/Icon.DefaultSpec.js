@@ -5,9 +5,9 @@ describe("Icon.Default", function () {
 		div.style.height = '100px';
 		document.body.appendChild(div);
 
-		var map = Cartographer.map(div).setView([0, 0], 0);
+		var map = L.map(div).setView([0, 0], 0);
 
-		var marker = new Cartographer.Marker([0, 0]).addTo(map);
+		var marker = new L.Marker([0, 0]).addTo(map);
 
 		var img = map.getPane('markerPane').querySelector('img');
 		expect(img.clientHeight).to.be(41);
@@ -20,9 +20,9 @@ describe("Icon.Default", function () {
 		div.style.height = '100px';
 		document.body.appendChild(div);
 
-		var map = Cartographer.map(div).setView([0, 0], 0);
+		var map = L.map(div).setView([0, 0], 0);
 
-		var marker = new Cartographer.Marker([0, 0]).addTo(map);
+		var marker = new L.Marker([0, 0]).addTo(map);
 
 		var img = map.getPane('shadowPane').querySelector('img');
 		expect(img.clientHeight).to.be(41);

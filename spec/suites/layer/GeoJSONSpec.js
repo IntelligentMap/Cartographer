@@ -1,4 +1,4 @@
-describe("Cartographer.GeoJSON", function () {
+describe("L.GeoJSON", function () {
 
 	describe("addData", function () {
 		var geojson = {
@@ -15,19 +15,19 @@ describe("Cartographer.GeoJSON", function () {
 		};
 
 		it("sets feature property on member layers", function () {
-			var layer = new Cartographer.GeoJSON();
+			var layer = new L.GeoJSON();
 			layer.addData(geojson);
 			expect(layer.getLayers()[0].feature).to.eql(geojson);
 		});
 
 		it("normalizes a geometry to a Feature", function () {
-			var layer = new Cartographer.GeoJSON();
+			var layer = new L.GeoJSON();
 			layer.addData(geojson.geometry);
 			expect(layer.getLayers()[0].feature).to.eql(geojson);
 		});
 
 		it("accepts geojson with null geometry", function () {
-			var layer = new Cartographer.GeoJSON();
+			var layer = new L.GeoJSON();
 			layer.addData(geojsonEmpty);
 			expect(layer.getLayers().length).to.eql(0);
 		});
@@ -43,7 +43,7 @@ describe("Cartographer.GeoJSON", function () {
 					coordinates:[[-2.35, 51.38], [-2.38, 51.38]]
 				}
 			};
-			var geojson = Cartographer.geoJSON(feature, {weight: 7, color: 'chocolate'});
+			var geojson = L.geoJSON(feature, {weight: 7, color: 'chocolate'});
 			geojson.setStyle({weight: 22, color: 'coral'});
 			var layer = geojson.getLayers()[0];
 			expect(layer.options.weight).to.be(22);
@@ -57,9 +57,9 @@ describe("Cartographer.GeoJSON", function () {
 
 });
 
-describe("Cartographer.Marker#toGeoJSON", function () {
+describe("L.Marker#toGeoJSON", function () {
 	it("returns a 2D Point object", function () {
-		var marker = new Cartographer.Marker([10, 20]);
+		var marker = new L.Marker([10, 20]);
 		expect(marker.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10]
@@ -67,7 +67,7 @@ describe("Cartographer.Marker#toGeoJSON", function () {
 	});
 
 	it("returns a 3D Point object", function () {
-		var marker = new Cartographer.Marker([10, 20, 30]);
+		var marker = new L.Marker([10, 20, 30]);
 		expect(marker.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10, 30]
@@ -75,7 +75,7 @@ describe("Cartographer.Marker#toGeoJSON", function () {
 	});
 
 	it('should allow specific precisions', function () {
-		var marker = new Cartographer.Marker([10.123456, 20.123456, 30.123456]);
+		var marker = new L.Marker([10.123456, 20.123456, 30.123456]);
 		expect(marker.toGeoJSON(3).geometry).to.eql({
 			type: 'Point',
 			coordinates: [20.123, 10.123, 30.123]
@@ -83,9 +83,9 @@ describe("Cartographer.Marker#toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.Circle#toGeoJSON", function () {
+describe("L.Circle#toGeoJSON", function () {
 	it("returns a 2D Point object", function () {
-		var circle = new Cartographer.Circle([10, 20], 100);
+		var circle = new L.Circle([10, 20], 100);
 		expect(circle.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10]
@@ -93,7 +93,7 @@ describe("Cartographer.Circle#toGeoJSON", function () {
 	});
 
 	it("returns a 3D Point object", function () {
-		var circle = new Cartographer.Circle([10, 20, 30], 100);
+		var circle = new L.Circle([10, 20, 30], 100);
 		expect(circle.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10, 30]
@@ -101,7 +101,7 @@ describe("Cartographer.Circle#toGeoJSON", function () {
 	});
 
 	it('should allow specific precisions', function () {
-		var circle = new Cartographer.Circle([10.1234, 20.1234, 30.1234], 100);
+		var circle = new L.Circle([10.1234, 20.1234, 30.1234], 100);
 		expect(circle.toGeoJSON(3).geometry).to.eql({
 			type: 'Point',
 			coordinates: [20.123, 10.123, 30.123]
@@ -109,9 +109,9 @@ describe("Cartographer.Circle#toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.CircleMarker#toGeoJSON", function () {
+describe("L.CircleMarker#toGeoJSON", function () {
 	it("returns a 2D Point object", function () {
-		var marker = new Cartographer.CircleMarker([10, 20]);
+		var marker = new L.CircleMarker([10, 20]);
 		expect(marker.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10]
@@ -119,7 +119,7 @@ describe("Cartographer.CircleMarker#toGeoJSON", function () {
 	});
 
 	it("returns a 3D Point object", function () {
-		var marker = new Cartographer.CircleMarker([10, 20, 30]);
+		var marker = new L.CircleMarker([10, 20, 30]);
 		expect(marker.toGeoJSON().geometry).to.eql({
 			type: 'Point',
 			coordinates: [20, 10, 30]
@@ -127,7 +127,7 @@ describe("Cartographer.CircleMarker#toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var marker = new Cartographer.CircleMarker([10.1234, 20.1234]);
+		var marker = new L.CircleMarker([10.1234, 20.1234]);
 		expect(marker.toGeoJSON(3).geometry).to.eql({
 			type: 'Point',
 			coordinates: [20.123, 10.123]
@@ -135,9 +135,9 @@ describe("Cartographer.CircleMarker#toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.Polyline#toGeoJSON", function () {
+describe("L.Polyline#toGeoJSON", function () {
 	it("returns a 2D LineString object", function () {
-		var polyline = new Cartographer.Polyline([[10, 20], [2, 5]]);
+		var polyline = new L.Polyline([[10, 20], [2, 5]]);
 		expect(polyline.toGeoJSON().geometry).to.eql({
 			type: 'LineString',
 			coordinates: [[20, 10], [5, 2]]
@@ -145,7 +145,7 @@ describe("Cartographer.Polyline#toGeoJSON", function () {
 	});
 
 	it("returns a 3D LineString object", function () {
-		var polyline = new Cartographer.Polyline([[10, 20, 30], [2, 5, 10]]);
+		var polyline = new L.Polyline([[10, 20, 30], [2, 5, 10]]);
 		expect(polyline.toGeoJSON().geometry).to.eql({
 			type: 'LineString',
 			coordinates: [[20, 10, 30], [5, 2, 10]]
@@ -153,7 +153,7 @@ describe("Cartographer.Polyline#toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var polyline = new Cartographer.Polyline([[10.1234, 20.1234, 30.1234], [2.1234, 5.1234, 10.1234]]);
+		var polyline = new L.Polyline([[10.1234, 20.1234, 30.1234], [2.1234, 5.1234, 10.1234]]);
 		expect(polyline.toGeoJSON(3).geometry).to.eql({
 			type: 'LineString',
 			coordinates: [[20.123, 10.123, 30.123], [5.123, 2.123, 10.123]]
@@ -161,9 +161,9 @@ describe("Cartographer.Polyline#toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.Polyline (multi) #toGeoJSON", function () {
+describe("L.Polyline (multi) #toGeoJSON", function () {
 	it("returns a 2D MultiLineString object", function () {
-		var multiPolyline = new Cartographer.Polyline([[[10, 20], [2, 5]], [[1, 2], [3, 4]]]);
+		var multiPolyline = new L.Polyline([[[10, 20], [2, 5]], [[1, 2], [3, 4]]]);
 		expect(multiPolyline.toGeoJSON().geometry).to.eql({
 			type: 'MultiLineString',
 			coordinates: [
@@ -174,7 +174,7 @@ describe("Cartographer.Polyline (multi) #toGeoJSON", function () {
 	});
 
 	it("returns a 3D MultiLineString object", function () {
-		var multiPolyline = new Cartographer.Polyline([[[10, 20, 30], [2, 5, 10]], [[1, 2, 3], [4, 5, 6]]]);
+		var multiPolyline = new L.Polyline([[[10, 20, 30], [2, 5, 10]], [[1, 2, 3], [4, 5, 6]]]);
 		expect(multiPolyline.toGeoJSON().geometry).to.eql({
 			type: 'MultiLineString',
 			coordinates: [
@@ -185,7 +185,7 @@ describe("Cartographer.Polyline (multi) #toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var multiPolyline = new Cartographer.Polyline([[[10.1234, 20.1234, 30.1234], [2.1234, 5.1234, 10.1234]], [[1.1234, 2.1234, 3.1234], [4.1234, 5.1234, 6.1234]]]);
+		var multiPolyline = new L.Polyline([[[10.1234, 20.1234, 30.1234], [2.1234, 5.1234, 10.1234]], [[1.1234, 2.1234, 3.1234], [4.1234, 5.1234, 6.1234]]]);
 		expect(multiPolyline.toGeoJSON(3).geometry).to.eql({
 			type: 'MultiLineString',
 			coordinates: [
@@ -196,9 +196,9 @@ describe("Cartographer.Polyline (multi) #toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.Polygon#toGeoJSON", function () {
+describe("L.Polygon#toGeoJSON", function () {
 	it("returns a 2D Polygon object (no holes) from a flat LatLngs array", function () {
-		var polygon = new Cartographer.Polygon([[1, 2], [3, 4], [5, 6]]);
+		var polygon = new L.Polygon([[1, 2], [3, 4], [5, 6]]);
 		expect(polygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [[[2, 1], [4, 3], [6, 5], [2, 1]]]
@@ -206,7 +206,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("returns a 3D Polygon object (no holes) from a flat LatLngs array", function () {
-		var polygon = new Cartographer.Polygon([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+		var polygon = new L.Polygon([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 		expect(polygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [[[2, 1, 3], [5, 4, 6], [8, 7, 9], [2, 1, 3]]]
@@ -214,7 +214,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("returns a 2D Polygon object from a simple GeoJSON like input", function () {
-		var multiPolygon = new Cartographer.Polygon([[[1, 2], [3, 4], [5, 6]]]);
+		var multiPolygon = new L.Polygon([[[1, 2], [3, 4], [5, 6]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [
@@ -224,7 +224,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("returns a 3D MultiPolygon object from a simple GeoJSON like input", function () {
-		var multiPolygon = new Cartographer.Polygon([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]);
+		var multiPolygon = new L.Polygon([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [
@@ -234,7 +234,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("returns a 2D Polygon object (with holes)", function () {
-		var polygon = new Cartographer.Polygon([[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]]);
+		var polygon = new L.Polygon([[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]]);
 		expect(polygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [
@@ -245,7 +245,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("returns a 3D Polygon object (with holes)", function () {
-		var polygon = new Cartographer.Polygon([[[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[10, 11, 12], [13, 14, 15], [16, 17, 18]]]);
+		var polygon = new L.Polygon([[[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[10, 11, 12], [13, 14, 15], [16, 17, 18]]]);
 		expect(polygon.toGeoJSON().geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [
@@ -256,7 +256,7 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var polygon = new Cartographer.Polygon([[1.1234, 2.1234], [3.1234, 4.1234], [5.1234, 6.1234]]);
+		var polygon = new L.Polygon([[1.1234, 2.1234], [3.1234, 4.1234], [5.1234, 6.1234]]);
 		expect(polygon.toGeoJSON(3).geometry).to.eql({
 			type: 'Polygon',
 			coordinates: [[[2.123, 1.123], [4.123, 3.123], [6.123, 5.123], [2.123, 1.123]]]
@@ -264,9 +264,9 @@ describe("Cartographer.Polygon#toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
+describe("L.Polygon (multi) #toGeoJSON", function () {
 	it("returns a 2D MultiPolygon object", function () {
-		var multiPolygon = new Cartographer.Polygon([[[[1, 2], [3, 4], [5, 6]]]]);
+		var multiPolygon = new L.Polygon([[[[1, 2], [3, 4], [5, 6]]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'MultiPolygon',
 			coordinates: [
@@ -276,7 +276,7 @@ describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
 	});
 
 	it("returns a 3D MultiPolygon object", function () {
-		var multiPolygon = new Cartographer.Polygon([[[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]]);
+		var multiPolygon = new L.Polygon([[[[1, 2, 3], [4, 5, 6], [7, 8, 9]]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'MultiPolygon',
 			coordinates: [
@@ -286,7 +286,7 @@ describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
 	});
 
 	it("returns a 2D MultiPolygon object with two polygons", function () {
-		var multiPolygon = new Cartographer.Polygon([[[[1, 2], [3, 4], [5, 6]]], [[[7, 8], [9, 10], [11, 12]]]]);
+		var multiPolygon = new L.Polygon([[[[1, 2], [3, 4], [5, 6]]], [[[7, 8], [9, 10], [11, 12]]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'MultiPolygon',
 			coordinates: [
@@ -297,7 +297,7 @@ describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
 	});
 
 	it("returns a 2D MultiPolygon object with polygon having a hole", function () {
-		var multiPolygon = new Cartographer.Polygon([[[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]]]);
+		var multiPolygon = new L.Polygon([[[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]]]);
 		expect(multiPolygon.toGeoJSON().geometry).to.eql({
 			type: 'MultiPolygon',
 			coordinates: [
@@ -307,7 +307,7 @@ describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var multiPolygon = new Cartographer.Polygon([[[[1.1234, 2.1234], [3.1234, 4.1234], [5.1234, 6.1234]]]]);
+		var multiPolygon = new L.Polygon([[[[1.1234, 2.1234], [3.1234, 4.1234], [5.1234, 6.1234]]]]);
 		expect(multiPolygon.toGeoJSON(3).geometry).to.eql({
 			type: 'MultiPolygon',
 			coordinates: [
@@ -317,11 +317,11 @@ describe("Cartographer.Polygon (multi) #toGeoJSON", function () {
 	});
 });
 
-describe("Cartographer.LayerGroup#toGeoJSON", function () {
+describe("L.LayerGroup#toGeoJSON", function () {
 	it("returns a 2D FeatureCollection object", function () {
-		var marker = new Cartographer.Marker([10, 20]),
-		    polyline = new Cartographer.Polyline([[10, 20], [2, 5]]),
-		    layerGroup = new Cartographer.LayerGroup([marker, polyline]);
+		var marker = new L.Marker([10, 20]),
+		    polyline = new L.Polyline([[10, 20], [2, 5]]),
+		    layerGroup = new L.LayerGroup([marker, polyline]);
 		expect(layerGroup.toGeoJSON()).to.eql({
 			type: 'FeatureCollection',
 			features: [marker.toGeoJSON(), polyline.toGeoJSON()]
@@ -329,9 +329,9 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 	});
 
 	it("returns a 3D FeatureCollection object", function () {
-		var marker = new Cartographer.Marker([10, 20, 30]),
-		    polyline = new Cartographer.Polyline([[10, 20, 30], [2, 5, 10]]),
-		    layerGroup = new Cartographer.LayerGroup([marker, polyline]);
+		var marker = new L.Marker([10, 20, 30]),
+		    polyline = new L.Polyline([[10, 20, 30], [2, 5, 10]]),
+		    layerGroup = new L.LayerGroup([marker, polyline]);
 		expect(layerGroup.toGeoJSON()).to.eql({
 			type: 'FeatureCollection',
 			features: [marker.toGeoJSON(), polyline.toGeoJSON()]
@@ -339,8 +339,8 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 	});
 
 	it("ensures that every member is a Feature", function () {
-		var tileLayer = new Cartographer.TileLayer(),
-		    layerGroup = new Cartographer.LayerGroup([tileLayer]);
+		var tileLayer = new L.TileLayer(),
+		    layerGroup = new L.LayerGroup([tileLayer]);
 
 		tileLayer.toGeoJSON = function () {
 			return {
@@ -405,7 +405,7 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 				}
 			}]
 		};
-		expect(Cartographer.geoJSON(json).toGeoJSON()).to.eql(expected);
+		expect(L.geoJSON(json).toGeoJSON()).to.eql(expected);
 	});
 
 	it('roundtrips MultiPoint features', function () {
@@ -436,12 +436,12 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 				}
 			}]
 		};
-		expect(Cartographer.geoJSON(json).toGeoJSON()).to.eql(expected);
+		expect(L.geoJSON(json).toGeoJSON()).to.eql(expected);
 	});
 
 	it("omits layers which do not implement toGeoJSON", function () {
-		var tileLayer = new Cartographer.TileLayer(),
-		    layerGroup = new Cartographer.LayerGroup([tileLayer]);
+		var tileLayer = new L.TileLayer(),
+		    layerGroup = new L.LayerGroup([tileLayer]);
 		expect(layerGroup.toGeoJSON()).to.eql({
 			type: 'FeatureCollection',
 			features: []
@@ -449,9 +449,9 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 	});
 
 	it('should return only one FeatureCollection for nested LayerGroups', function () {
-		var layerGroup = new Cartographer.LayerGroup([
-			new Cartographer.LayerGroup([new Cartographer.Marker([-41.3330287, 173.2008273])]),
-			new Cartographer.Marker([-41.273356, 173.287278])
+		var layerGroup = new L.LayerGroup([
+			new L.LayerGroup([new L.Marker([-41.3330287, 173.2008273])]),
+			new L.Marker([-41.273356, 173.287278])
 		]);
 
 		var geoJSON = layerGroup.toGeoJSON();
@@ -462,9 +462,9 @@ describe("Cartographer.LayerGroup#toGeoJSON", function () {
 	});
 
 	it("should allow specific precisions", function () {
-		var marker = new Cartographer.Marker([10, 20]),
-		    polyline = new Cartographer.Polyline([[10, 20], [2, 5]]),
-		    layerGroup = new Cartographer.LayerGroup([marker, polyline]);
+		var marker = new L.Marker([10, 20]),
+		    polyline = new L.Polyline([[10, 20], [2, 5]]),
+		    layerGroup = new L.LayerGroup([marker, polyline]);
 		expect(layerGroup.toGeoJSON(3)).to.eql({
 			type: 'FeatureCollection',
 			features: [marker.toGeoJSON(3), polyline.toGeoJSON(3)]

@@ -1,7 +1,7 @@
 describe('Path', function () {
 
 	// The following two tests are skipped, as the ES6-ifycation of Leaflet
-	// means that Cartographer.Path is no longer visible.
+	// means that L.Path is no longer visible.
 	describe('#bringToBack', function () {
 
 		var c, map;
@@ -10,8 +10,8 @@ describe('Path', function () {
 			c = document.createElement('div');
 			c.style.width = '400px';
 			c.style.height = '400px';
-			map = new Cartographer.Map(c);
-			map.setView(new Cartographer.LatLng(0, 0), 0);
+			map = new L.Map(c);
+			map.setView(new L.LatLng(0, 0), 0);
 			document.body.appendChild(c);
 		});
 
@@ -19,13 +19,13 @@ describe('Path', function () {
 			document.body.removeChild(c);
 		});
 		it('is a no-op for layers not on a map', function () {
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
 			expect(path.bringToBack()).to.equal(path);
 		});
 
 		it('is a no-op for layers no longer in a LayerGroup', function () {
-			var group = new Cartographer.LayerGroup().addTo(map);
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
+			var group = new L.LayerGroup().addTo(map);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
 
 			group.clearLayers();
 
@@ -41,8 +41,8 @@ describe('Path', function () {
 			c = document.createElement('div');
 			c.style.width = '400px';
 			c.style.height = '400px';
-			map = new Cartographer.Map(c);
-			map.setView(new Cartographer.LatLng(0, 0), 0);
+			map = new L.Map(c);
+			map.setView(new L.LatLng(0, 0), 0);
 			document.body.appendChild(c);
 		});
 
@@ -50,13 +50,13 @@ describe('Path', function () {
 			document.body.removeChild(c);
 		});
 		it('is a no-op for layers not on a map', function () {
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
 			expect(path.bringToFront()).to.equal(path);
 		});
 
 		it('is a no-op for layers no longer in a LayerGroup', function () {
-			var group = new Cartographer.LayerGroup().addTo(map);
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
+			var group = new L.LayerGroup().addTo(map);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]).addTo(group);
 
 			group.clearLayers();
 
@@ -72,8 +72,8 @@ describe('Path', function () {
 			c = document.createElement('div');
 			c.style.width = '400px';
 			c.style.height = '400px';
-			map = new Cartographer.Map(c);
-			map.setView(new Cartographer.LatLng(0, 0), 0);
+			map = new L.Map(c);
+			map.setView(new L.LatLng(0, 0), 0);
 			document.body.appendChild(c);
 		});
 
@@ -83,7 +83,7 @@ describe('Path', function () {
 
 		it('fires click event', function () {
 			var spy = sinon.spy();
-			var layer = new Cartographer.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
+			var layer = new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
 			layer.on('click', spy);
 			happen.click(layer._path);
 			expect(spy.called).to.be.ok();
@@ -93,7 +93,7 @@ describe('Path', function () {
 			var spy = sinon.spy();
 			var spy2 = sinon.spy();
 			var mapSpy = sinon.spy();
-			var layer = new Cartographer.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
+			var layer = new L.Polygon([[1, 2], [3, 4], [5, 6]]).addTo(map);
 			layer.on('click', spy);
 			layer.on('click', spy2);
 			map.on('click', mapSpy);
@@ -104,13 +104,13 @@ describe('Path', function () {
 		});
 
 		it('can add a layer while being inside a moveend handler', function (done) {
-			var zoneLayer = Cartographer.layerGroup();
+			var zoneLayer = L.layerGroup();
 			var polygon;
 			map.addLayer(zoneLayer);
 
 			map.on('moveend', function () {
 				zoneLayer.clearLayers();
-				polygon = new Cartographer.Polygon([[1, 2], [3, 4], [5, 6]]);
+				polygon = new L.Polygon([[1, 2], [3, 4], [5, 6]]);
 				zoneLayer.addLayer(polygon);
 			});
 
@@ -129,13 +129,13 @@ describe('Path', function () {
 		});
 
 		it('it should return tolerance with stroke', function () {
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
 			var layer = path.addTo(map);
 			expect(path._clickTolerance()).to.equal(path.options.weight / 2);
 		});
 
 		it('it should return zero tolerance without stroke', function () {
-			var path = new Cartographer.Polyline([[1, 2], [3, 4], [5, 6]]);
+			var path = new L.Polyline([[1, 2], [3, 4], [5, 6]]);
 			var layer = path.addTo(map);
 			path.options.stroke = false;
 			expect(path._clickTolerance()).to.equal(0);

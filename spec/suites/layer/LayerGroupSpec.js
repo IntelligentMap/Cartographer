@@ -1,7 +1,7 @@
 ﻿describe('LayerGroup', function () {
 	describe("#hasLayer", function () {
 		it("returns false when passed undefined, null, or false", function () {
-			var lg = Cartographer.layerGroup();
+			var lg = L.layerGroup();
 			expect(lg.hasLayer(undefined)).to.equal(false);
 			expect(lg.hasLayer(null)).to.equal(false);
 			expect(lg.hasLayer(false)).to.equal(false);
@@ -10,8 +10,8 @@
 
 	describe("#addLayer", function () {
 		it('adds a layer', function () {
-			var lg = Cartographer.layerGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var lg = L.layerGroup(),
+			    marker = L.marker([0, 0]);
 
 			expect(lg.addLayer(marker)).to.eql(lg);
 
@@ -21,8 +21,8 @@
 
 	describe("#removeLayer", function () {
 		it('removes a layer', function () {
-			var lg = Cartographer.layerGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var lg = L.layerGroup(),
+			    marker = L.marker([0, 0]);
 
 			lg.addLayer(marker);
 			expect(lg.removeLayer(marker)).to.eql(lg);
@@ -33,8 +33,8 @@
 
 	describe("#clearLayers", function () {
 		it('removes all layers', function () {
-			var lg = Cartographer.layerGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var lg = L.layerGroup(),
+			    marker = L.marker([0, 0]);
 
 			lg.addLayer(marker);
 			expect(lg.clearLayers()).to.eql(lg);
@@ -45,8 +45,8 @@
 
 	describe("#getLayers", function () {
 		it('gets all layers', function () {
-			var lg = Cartographer.layerGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var lg = L.layerGroup(),
+			    marker = L.marker([0, 0]);
 
 			lg.addLayer(marker);
 
@@ -56,8 +56,8 @@
 
 	describe("#eachLayer", function () {
 		it('iterates over all layers', function () {
-			var lg = Cartographer.layerGroup(),
-			    marker = Cartographer.marker([0, 0]),
+			var lg = L.layerGroup(),
+			    marker = L.marker([0, 0]),
 			    ctx = {foo: 'bar'};
 
 			lg.addLayer(marker);
@@ -85,21 +85,21 @@
 				]
 			};
 
-			var layerGroup = Cartographer.layerGroup();
-			var layer = Cartographer.geoJSON(geoJSON);
+			var layerGroup = L.layerGroup();
+			var layer = L.geoJSON(geoJSON);
 			layerGroup.addLayer(layer);
 
-			Cartographer.geoJson(layerGroup.toGeoJSON());
+			L.geoJson(layerGroup.toGeoJSON());
 		});
 	});
 
 	describe("#invoke", function () {
 		it('should invoke `setOpacity` method on every layer', function () {
 			var layers = [
-				Cartographer.marker([0, 0]),
-				Cartographer.marker([1, 1])
+				L.marker([0, 0]),
+				L.marker([1, 1])
 			];
-			var lg = Cartographer.layerGroup(layers);
+			var lg = L.layerGroup(layers);
 			var opacity = 0.5;
 
 			expect(layers[0].options.opacity).to.not.eql(opacity);

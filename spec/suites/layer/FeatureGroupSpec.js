@@ -1,18 +1,18 @@
 ﻿describe('FeatureGroup', function () {
 	var map;
 	beforeEach(function () {
-		map = Cartographer.map(document.createElement('div'));
+		map = L.map(document.createElement('div'));
 		map.setView([0, 0], 1);
 	});
 	describe("#_propagateEvent", function () {
 		var marker;
 		beforeEach(function () {
-			marker = Cartographer.marker([0, 0]);
+			marker = L.marker([0, 0]);
 		});
 		describe("when a Marker is added to multiple FeatureGroups ", function () {
 			it("e.propagatedFrom should be the Marker", function () {
-				var fg1 = Cartographer.featureGroup(),
-				    fg2 = Cartographer.featureGroup();
+				var fg1 = L.featureGroup(),
+				    fg2 = L.featureGroup();
 
 				fg1.addLayer(marker);
 				fg2.addLayer(marker);
@@ -41,8 +41,8 @@
 	});
 	describe('addLayer', function () {
 		it('adds the layer', function () {
-			var fg = Cartographer.featureGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var fg = L.featureGroup(),
+			    marker = L.marker([0, 0]);
 
 			expect(fg.hasLayer(marker)).to.be(false);
 
@@ -51,8 +51,8 @@
 			expect(fg.hasLayer(marker)).to.be(true);
 		});
 		it('supports non-evented layers', function () {
-			var fg = Cartographer.featureGroup(),
-			    g = Cartographer.layerGroup();
+			var fg = L.featureGroup(),
+			    g = L.layerGroup();
 
 			expect(fg.hasLayer(g)).to.be(false);
 
@@ -63,8 +63,8 @@
 	});
 	describe('removeLayer', function () {
 		it('removes the layer passed to it', function () {
-			var fg = Cartographer.featureGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var fg = L.featureGroup(),
+			    marker = L.marker([0, 0]);
 
 			fg.addLayer(marker);
 			expect(fg.hasLayer(marker)).to.be(true);
@@ -73,13 +73,13 @@
 			expect(fg.hasLayer(marker)).to.be(false);
 		});
 		it('removes the layer passed to it by id', function () {
-			var fg = Cartographer.featureGroup(),
-			    marker = Cartographer.marker([0, 0]);
+			var fg = L.featureGroup(),
+			    marker = L.marker([0, 0]);
 
 			fg.addLayer(marker);
 			expect(fg.hasLayer(marker)).to.be(true);
 
-			fg.removeLayer(Cartographer.stamp(marker));
+			fg.removeLayer(L.stamp(marker));
 			expect(fg.hasLayer(marker)).to.be(false);
 		});
 	});

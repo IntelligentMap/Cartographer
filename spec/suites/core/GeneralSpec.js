@@ -6,14 +6,14 @@ describe('General', function () {
 			L = leaflet;
 		});
 
-		expect(Cartographer.noConflict()).to.eql(leaflet);
+		expect(L.noConflict()).to.eql(leaflet);
 	});
 
 	describe('namespace extension', function () {
-		Cartographer.Util.foo = 'bar';
-		Cartographer.Foo = 'Bar';
+		L.Util.foo = 'bar';
+		L.Foo = 'Bar';
 
-		expect(Cartographer.Util.foo).to.eql('bar');
-		expect(Cartographer.Foo).to.eql('Bar');
+		expect(L.Util.foo).to.eql('bar');
+		expect(L.Foo).to.eql('Bar');
 	});
 });

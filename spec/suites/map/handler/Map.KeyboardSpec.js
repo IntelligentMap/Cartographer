@@ -8,7 +8,7 @@ describe("Map.Keyboard", function () {
 		container.style.top = container.style.left = 0;
 		container.style.position = 'absolute';
 		document.body.appendChild(container);
-		map = Cartographer.map(container, {
+		map = L.map(container, {
 			zoomAnimation: false	// If true, the test has to wait extra 250msec
 		});
 
@@ -135,7 +135,7 @@ describe("Map.Keyboard", function () {
 	describe("popup closing", function () {
 		it("closes a popup when pressing escape", function () {
 
-			var popup = Cartographer.popup().setLatLng([0, 0]).setContent('Null Island');
+			var popup = L.popup().setLatLng([0, 0]).setContent('Null Island');
 			map.openPopup(popup);
 
 			expect(popup.isOpen()).to.be(true);
@@ -151,7 +151,7 @@ describe("Map.Keyboard", function () {
 	describe("popup closing disabled", function () {
 		it("close of popup when pressing escape disabled via options", function () {
 
-			var popup = Cartographer.popup({closeOnEscapeKey: false}).setLatLng([0, 0]).setContent('Null Island');
+			var popup = L.popup({closeOnEscapeKey: false}).setLatLng([0, 0]).setContent('Null Island');
 			map.openPopup(popup);
 
 			expect(popup.isOpen()).to.be(true);
