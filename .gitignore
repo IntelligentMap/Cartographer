@@ -9,6 +9,7 @@ _site
 _site
 dist/*.js
 dist/*.map
+dist/cartographer.zip
 dist/reference.html
 coverage/
 *.js.html
