@@ -1,13 +1,13 @@
 var json = require('rollup-plugin-json');
 
-const outro = `var oldL = window.L;
+const outro = `var oldCartographer = window.Cartographer;
 exports.noConflict = function() {
-	window.L = oldL;
+	window.Cartographer = oldCartographer;
 	return this;
 }
 
 // Always export us to window global (see #2364)
-window.L = exports;`;
+window.Cartographer = exports;`;
 
 // Karma configuration
 module.exports = function (config) {
