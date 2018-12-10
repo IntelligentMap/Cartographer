@@ -14,7 +14,7 @@ after_success:
 - NAME=$TRAVIS_BRANCH
 - "[[ $TRAVIS_PULL_REQUEST != 'false' ]] && NAME=$TRAVIS_PULL_REQUEST"
 - "[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG"
-- curl -i -X POST -F "branch=$TRAVIS_BRANCH" -F "commit=$TRAVIS_COMMIT" -F "key=$OCBLOBS_KEY" -F 'upfile=@dist/cartographer.zip' http://cartographer.blobs.oopscommand.com/upload.php
+- curl -i -X POST -F "branch=$TRAVIS_BRANCH" -F "commit=$TRAVIS_COMMIT" -F "key=$OCBLOBS_KEY" -F 'upfile=@dist/cartographer.zip' https://cartographer.blobs.oopscommand.com/upload.php
 env:
   global:
     secure: Iwn8DNOu0SdULMK3963ZOa8c9vPNiV+7vumzSOVZWVCsOLpbk23JGX+E+Cg2RiFPP5FYv3AgczxNHmZ3X2swcU/IhMRy9tY1LU/p9SBVz5SXO9iUXdg2wbe2ktIrfEq1EEMr/XZTn79eWFwK3ZCFQCnCASOi4E9lFSyhxhNrDzWQezd+H5BXaKcRYRbHJHMS2YNqinLwlxht7rxRMfObxn2SdfogV4TDdNlv9KYA6IAmrkMspdhn36Q03sZAgMxsSOU+RS73xExZkD859oFM3Wp0E30bUAXcVuVMUcYp4tk7PW7X9T5sIzyHZcpid4Gat9SeOD3J32cuq/FKdfxE4+Yhb4R69o8bUzRLD7KvpJiWsrzG3AXhWSC94eV54F7zffnoteb9KTFFyPGxznHWNeys6JPT7qNJxVAkJa4OCyHhnFyT2oVMxx3zfK3z+wpwhB1bwoBmOi1qFIAD57FfQWBy2+j4adEz0wh/PP99dWcF1ip1nZ4FZVFBIBn6UFhz0tpWgURhY5hi263X69Rkosvwzm979Wq7sdgVAmPd2Dv+FCe5Yyiw0uRMirnzMdzV9p7abfpljKgvYA2wORh5Qv6oiWIK3lfwxgu0I+p9HopG3yzXGXxPEVfXSsE8XZjkUPGPLdUEKcmEx3dq4x870E3h2GaD8qePDw/nYGvXFxQ=
