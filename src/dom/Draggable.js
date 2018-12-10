@@ -1,4 +1,4 @@
-import {Evented} from '../core/Events';
+import {Evented} from '../core/Evented';
 import * as Browser from '../core/Browser';
 import * as DomEvent from './DomEvent';
 import * as DomUtil from './DomUtil';

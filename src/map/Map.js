@@ -1,5 +1,5 @@
 import * as Util from '../core/Util';
-import {Evented} from '../core/Events';
+import {Evented} from '../core/Evented';
 import {EPSG3857} from '../geo/crs/CRS.EPSG3857';
 import {Point, toPoint} from '../geometry/Point';
 import {Bounds, toBounds} from '../geometry/Bounds';

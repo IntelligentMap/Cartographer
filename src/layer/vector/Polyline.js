@@ -325,4 +325,4 @@ export function polyline(latlngs, options) {
 }
 
 // Retrocompat. Allow plugins to support Leaflet versions before and after 1.1.
-Polyline._flat = LineUtil._flat;
+Polyline.isFlat = LineUtil.isFlat;

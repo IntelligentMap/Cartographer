@@ -1,4 +1,4 @@
-import {Evented} from '../core/Events';
+import {Evented} from '../core/Evented';
 import {Map} from '../map/Map';
 import * as Util from '../core/Util';
 

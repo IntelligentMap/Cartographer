@@ -241,7 +241,7 @@ var wheelPxFactor =
 // @function getWheelDelta(ev: DOMEvent): Number
 // Gets normalized wheel delta from a mousewheel DOM event, in vertical
 // pixels scrolled (negative if scrolling down).
-// Events from pointing devices without precise scrolling are mapped to
+// Evented from pointing devices without precise scrolling are mapped to
 // a best guess of 60 pixels.
 export function getWheelDelta(e) {
 	return (Browser.edge) ? e.wheelDeltaY / 2 : // Don't trust window-geometry-based delta

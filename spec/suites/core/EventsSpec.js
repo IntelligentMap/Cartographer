@@ -1,4 +1,4 @@
-describe('Events', function () {
+describe('Evented', function () {
 
 	describe('#fireEvent', function () {
 
@@ -503,7 +503,7 @@ describe('Events', function () {
 			expect(spy.called).to.be(false);
 		});
 
-		it('works if called from a context that doesnt implement #Events', function () {
+		it('works if called from a context that doesnt implement #Evented', function () {
 			var obj = new L.Evented(),
 			    spy = sinon.spy(),
 			    foo = {};
@@ -635,11 +635,9 @@ describe('Events', function () {
 		});
 	});
 
-	describe('#L.Mixin.Events', function () {
+	describe('#L.Evented', function () {
 		it('can be used from includes', function () {
-			var EventClass = L.Class.extend({
-				includes: L.Mixin.Events
-			});
+			var EventClass = L.Evented;
 			var obj = new EventClass();
 			var spy = sinon.spy();
 
