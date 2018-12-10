@@ -3,18 +3,18 @@
 <head>
 	{% capture title %}{% if page.title %}{{ page.title }} - {% elsif post.title %}{{ post.title }} - {% endif %}{% endcapture %}
 
-	<title>{{ title }}Leaflet - a JavaScript library for interactive maps</title>
+	<title>{{ title }}Cartographer - a JavaScript library for interactive maps</title>
 
 	<meta charset="utf-8" />
 
 	{% if title == '' %}
-	<meta property="og:title" content="Leaflet — an open-source JavaScript library for interactive maps" />
-	<meta property="og:description" content="Leaflet is a modern, lightweight open-source JavaScript library for mobile-friendly interactive maps." />
-	<meta property="og:image" content="https://leafletjs.com/docs/images/logo.png" />
+	<meta property="og:title" content="Cartographer — an open-source JavaScript library for interactive maps" />
+	<meta property="og:description" content="Cartographer is a modern, lightweight open-source JavaScript library for mobile-friendly interactive maps." />
+	<meta property="og:image" content="https://intelligentmap.github.io/Cartographer/docs/images/logo.png" />
 
-	<meta itemprop="name" content="Leaflet">
-	<meta itemprop="description" content="Leaflet — a modern, lightweight open-source JavaScript library for mobile-friendly interactive maps.">
-	<meta itemprop="image" content="https://leafletjs.com/docs/images/logo.png">
+	<meta itemprop="name" content="Cartographer">
+	<meta itemprop="description" content="Cartographer — a modern, lightweight open-source JavaScript library for mobile-friendly interactive maps.">
+	<meta itemprop="image" content="https://intelligentmap.github.io/Cartographer/docs/images/logo.png">
 	{% endif %}
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
 
 	<link rel="shortcut icon" type="image/x-icon" href="{{ root }}docs/images/favicon.ico" />
 
-	<link href="https://leafletjs.com/atom.xml" type="application/atom+xml" rel="alternate" title="Leaflet Dev Blog Atom Feed" />
+	<link href="https://intelligentmap.github.io/Cartographer/atom.xml" type="application/atom+xml" rel="alternate" title="Cartographer Dev Blog Atom Feed" />
 
 	<link rel="stylesheet" href="{{ root }}docs/css/normalize.css" />
 	<link rel="stylesheet" href="{{ root }}docs/css/main.css" />
@@ -33,9 +33,9 @@
 	<script src="{{ root }}docs/highlight/highlight.pack.js"></script>
 	<link rel="stylesheet" href="{{ root }}docs/highlight/styles/github-gist.css" />
 
-	<!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@{{ site.latest_leaflet_version}}/dist/leaflet.css" integrity="{{site.integrity_hash_css}}" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@{{ site.latest_leaflet_version}}/dist/leaflet.js" integrity="{{site.integrity_hash_uglified}}" crossorigin=""></script>
+	<!-- Cartographer -->
+    <link rel="stylesheet" href="http://cartographer.blobs.oopscommand.com/uploads/{{ site.latest_leaflet_version}}/cartographer.css" integrity="{{site.integrity_hash_css}}" crossorigin=""/>
+    <script src="http://cartographer.blobs.oopscommand.com/uploads/{{ site.latest_leaflet_version}}/cartographer.js" integrity="{{site.integrity_hash_uglified}}" crossorigin=""></script>
 
 	{% if page.css %}<style>{{ page.css }}</style>{% endif %}
 
@@ -51,7 +51,7 @@
 </head>
 <body{% if page.bodyclass %} class="{{ page.bodyclass }}"{% endif %}>
 
-<h1><a href="https://leafletjs.com/"><img src="{{ root }}docs/images/logo.png" alt="Leaflet" width="300" /></a></h1>
+<h1><a href="https://intelligentmap.github.io/Cartographer/"><img src="{{ root }}docs/images/logo.png" alt="Cartographer" width="300" /></a></h1>
 <h3 class="tagline">an open-source JavaScript library<br> for mobile-friendly interactive maps</h3>
 
 <ul class="nav">
@@ -111,9 +111,9 @@
 </div>
 
 <nav class="ext-links">
-  <a class="ext-link twitter" href="https://twitter.com/LeafletJS" title="Follow LeafletJS on Twitter"><img alt="Follow LeafletJS on Twitter" src="{{root}}docs/images/twitter-round.png" width="46" /></a>
-  <a class="ext-link github" href="http://github.com/Leaflet/Leaflet" title="View Source on GitHub"><img alt="View Source on GitHub" src="{{root}}docs/images/github-round.png" width="46" /></a>
-  <a class="ext-link forum" href="https://stackoverflow.com/questions/tagged/leaflet" title="Ask for help on Stack Overflow"><img alt="Leaflet questions on Stack Overflow" src="{{root}}docs/images/forum-round.png" width="46" /></a>
+  <a class="ext-link twitter" href="https://twitter.com/CartographerJS" title="Follow CartographerJS on Twitter"><img alt="Follow CartographerJS on Twitter" src="{{root}}docs/images/twitter-round.png" width="46" /></a>
+  <a class="ext-link github" href="http://github.com/IntelligentMap/Cartographer" title="View Source on GitHub"><img alt="View Source on GitHub" src="{{root}}docs/images/github-round.png" width="46" /></a>
+  <a class="ext-link forum" href="https://stackoverflow.com/questions/tagged/leaflet" title="Ask for help on Stack Overflow"><img alt="Cartographer questions on Stack Overflow" src="{{root}}docs/images/forum-round.png" width="46" /></a>
 </nav>
 
 <script>
@@ -134,23 +134,6 @@
 				}
 			}
 		}
-	})();
-</script>
-
-<script>
-	var _gaq = _gaq || [];
-	_gaq.push([ '_setAccount', 'UA-4147697-4' ]);
-	_gaq.push([ '_trackPageview' ]);
-
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-				: 'http://www')
-				+ '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
 	})();
 </script>
 

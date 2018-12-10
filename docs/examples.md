@@ -4,7 +4,7 @@ title: Tutorials
 bodyclass: examples
 ---
 
-## Leaflet Tutorials
+## Cartographer Tutorials
 
 Every tutorial here comes with step-by-step code explanation and is easy enough even for beginner JavaScript developers.
 
@@ -12,15 +12,15 @@ Every tutorial here comes with step-by-step code explanation and is easy enough 
 {% include tutorial_link.html
 page="quick-start/"
 thumbnail="quick-start/thumbnail.png"
-title="Leaflet Quick Start Guide"
-description="A simple step-by-step guide that will quickly get you started with Leaflet basics, including setting up a Leaflet map (with Mapbox tiles) on your page, working with markers, polylines and popups, and dealing with events."
+title="Cartographer Quick Start Guide"
+description="A simple step-by-step guide that will quickly get you started with Cartographer basics, including setting up a Cartographer map (with Mapbox tiles) on your page, working with markers, polylines and popups, and dealing with events."
 %}
 
 
 {% include tutorial_link.html
 page="mobile/"
 thumbnail="mobile/thumbnail.png"
-title="Leaflet on Mobile"
+title="Cartographer on Mobile"
 description="In this tutorial, you'll learn how to create a fullscreen map tuned for mobile devices like iPhone, iPad or Android phones, and how to easily detect and use the current user location."
 %}
 
@@ -36,7 +36,7 @@ description="In this pretty tutorial, you'll learn how to easily define your own
 {% include tutorial_link.html
 page="geojson/"
 thumbnail="geojson/thumbnail.png"
-title="Using GeoJSON with Leaflet"
+title="Using GeoJSON with Cartographer"
 description="In this tutorial, you'll learn how to create and interact with map vectors created from [GeoJSON](http://geojson.org/) objects."
 %}
 
@@ -92,26 +92,26 @@ description="How the default map panes work to display overlays on top of tiles,
 page="video-overlay/"
 thumbnail="video-overlay/thumbnail.gif"
 title="Showing video files"
-description="Leaflet can help you display videos somewhere on the map."
+description="Cartographer can help you display videos somewhere on the map."
 %}
 
 ***
 
-The following tutorials cover how to create plugins for Leaflet, and are intended only for developers experienced in Javascript:
+The following tutorials cover how to create plugins for Cartographer, and are intended only for developers experienced in Javascript:
 
 
 {% include tutorial_link.html
 page="extending/extending-1-classes.html"
 thumbnail="extending/thumbnail-1.png"
-title="Extending Leaflet: Class Theory"
-description="An overview of Leaflet's classes, class inheritance, and conventions."
+title="Extending Cartographer: Class Theory"
+description="An overview of Cartographer's classes, class inheritance, and conventions."
 %}
 
 
 {% include tutorial_link.html
 page="extending/extending-2-layers.html"
 thumbnail="extending/thumbnail-2.png"
-title="Extending Leaflet: Layers"
+title="Extending Cartographer: Layers"
 description="How to extend layers or create new ones, using specific entry points for doing so."
 %}
 
@@ -119,7 +119,7 @@ description="How to extend layers or create new ones, using specific entry point
 {% include tutorial_link.html
 page="extending/extending-3-controls.html"
 thumbnail="extending/thumbnail-3.png"
-title="Extending Leaflet: Handlers and Controls"
+title="Extending Cartographer: Handlers and Controls"
 description="How to extend or create non-layers."
 %}
 

@@ -4,9 +4,9 @@ title: Blog
 bodyclass: blog-page
 ---
 
-## Leaflet Developer Blog
+## Cartographer Developer Blog
 
-The main place for all important Leaflet-related news, tutorials, tips and development notes. [Subscribe to Atom feed](atom.xml)
+The main place for all important Cartographer-related news, tutorials, tips and development notes. [Subscribe to Atom feed](atom.xml)
 
 ---
 
