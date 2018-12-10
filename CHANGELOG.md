@@ -3,6 +3,12 @@ Leaflet Changelog
 
 (all changes without author notice are by [@mourner](https://github.com/mourner))
 
+## 1.3.5 (2018-12-10)
+
+### Forking information
+
+* Renamed. Now "Cartographer", not "Leaflet".
+
 ## 1.3.4 (2018-08-21)
 
 ### Improvements
