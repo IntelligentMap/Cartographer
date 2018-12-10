@@ -19,12 +19,12 @@ and push the limits of what's possible with online maps!
 [![Build Status](https://travis-ci.org/IntelligentMap/Cartographer.svg?branch=master)](https://travis-ci.org/IntelligentMap/Cartographer)
 
  [contributors]: https://github.com/IntelligentMap/IntelligentMap/graphs/contributors
- [features]: http://intelligentmap.oopscommand.com/#features
- [plugins]: http://intelligentmap.oopscommand.com/plugins.html
- [well-documented]: http://intelligentmap.oopscommand.com/reference.html "IntelligentMap API reference"
+ [features]: http://cartographer.oopscommand.com/#features
+ [plugins]: http://cartographer.oopscommand.com/plugins.html
+ [well-documented]: http://cartographer.oopscommand.com/reference.html "IntelligentMap API reference"
  [source code]: https://github.com/IntelligentMap/IntelligentMap "IntelligentMap GitHub repository"
  [hosted on GitHub]: http://github.com/IntelligentMap/IntelligentMap
  [contribute]: https://github.com/IntelligentMap/IntelligentMap/blob/master/CONTRIBUTING.md "A guide to contributing to IntelligentMap"
- [official website]: http://intelligentmap.oopscommand.com
- [download page]: http://intelligentmap.oopscommand.com/download.html
+ [official website]: http://cartographer.oopscommand.com
+ [download page]: http://cartographer.oopscommand.com/download.html
 

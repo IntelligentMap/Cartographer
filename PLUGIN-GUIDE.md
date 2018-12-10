@@ -1,9 +1,9 @@
-# Leaflet Plugin Authoring Guide
+# Cartographer Plugin Authoring Guide
 
-One of the greatest things about Leaflet is its powerful plugin ecosystem.
-The [Leaflet plugins page](http://leafletjs.com/plugins.html) lists dozens of awesome plugins, and more are being added every week.
+One of the greatest things about Cartographer is its powerful plugin ecosystem.
+The [Cartographer plugins page](http://leafletjs.com/plugins.html) lists dozens of awesome plugins, and more are being added every week.
 
-This guide lists a number of best practices for publishing a Leaflet plugin that meets the quality standards of Leaflet itself.
+This guide lists a number of best practices for publishing a Cartographer plugin that meets the quality standards of Cartographer itself.
 
 1. [Presentation](#presentation)
 	- [Repository](#repository)
@@ -23,16 +23,16 @@ This guide lists a number of best practices for publishing a Leaflet plugin that
 
 ### Repository
 
-The best place to put your Leaflet plugin is a separate [GitHub](http://github.com) repository.
+The best place to put your Cartographer plugin is a separate [GitHub](http://github.com) repository.
 If you create a collection of plugins for different uses,
 don't put them in one repo &mdash;
 it's usually easier to work with small, self-contained plugins in individual repositories.
 
 ### Name
 
-Most existing plugins follow the convention of naming plugins (and repos) like this: `Leaflet.MyPluginName`.
+Most existing plugins follow the convention of naming plugins (and repos) like this: `Cartographer.MyPluginName`.
 You can use other forms (e.g. "leaflet-my-plugin-name"),
-just make sure to include the word "Leaflet" in the name so that it's obvious that it's a Leaflet plugin.
+just make sure to include the word "Cartographer" in the name so that it's obvious that it's a Cartographer plugin.
 
 ### Demo
 
@@ -51,7 +51,7 @@ At a minimum it should contain the following items:
 - name of the plugin
 - a simple, concise description of what it does
 - requirements
-	- Leaflet version
+	- Cartographer version
 	- other external dependencies (if any)
 	- browser / device compatibility
 - links to demos
@@ -99,7 +99,7 @@ package.json
 Everyone's tastes are different, but it's important to be consistent with whatever conventions you choose for your plugin.
 
 For a good starting point, check out [Airbnb JavaScript Guide](https://github.com/airbnb/javascript).
-Leaflet follows pretty much the same conventions
+Cartographer follows pretty much the same conventions
 except for using smart tabs (hard tabs for indentation, spaces for alignment)
 and putting a space after the `function` keyword.
 
@@ -109,7 +109,7 @@ Never expose global variables in your plugin.<br>
 If you have a new class, put it directly in the `L` namespace (`L.MyPlugin`).<br>
 If you inherit one of the existing classes, make it a sub-property (`L.TileLayer.Banana`).<br>
 Every class should have a factory function in camelCase, e.g. (`L.tileLayer.banana`).<br>
-If you want to add new methods to existing Leaflet classes, you can do it like this: `L.Marker.include({myPlugin: …})`.
+If you want to add new methods to existing Cartographer classes, you can do it like this: `L.Marker.include({myPlugin: …})`.
 
 Function, method, property and factory names should be in `camelCase`.<br>
 Class names should be in `CapitalizedCamelCase`.
@@ -128,7 +128,7 @@ marker.myPlugin('bla', {
 });
 ```
 
-And most importantly, keep it simple. Leaflet is all about *simplicity*.
+And most importantly, keep it simple. Cartographer is all about *simplicity*.
 
 ## Publishing on NPM
 
@@ -136,9 +136,9 @@ NPM (Node Packaged Modules) is a package manager and code repository for JavaScr
 
 NPM has an excellent [developers guide](https://www.npmjs.org/doc/misc/npm-developers.html) to help you through the process.
 
-When you publish your plugin you should add a dependency on `leaflet` to your `package.json` file. This will automatically install Leaflet when your package is installed.
+When you publish your plugin you should add a dependency on `leaflet` to your `package.json` file. This will automatically install Cartographer when your package is installed.
 
-Here is an example of a `package.json` file for a Leaflet plugin.
+Here is an example of a `package.json` file for a Cartographer plugin.
 
 ```json
 {
@@ -178,7 +178,7 @@ to ensure that they are published to NPM.
 
 Module loaders such as [RequireJS](http://requirejs.org/) and [Browserify](http://browserify.org/) implement module systems like AMD (Asynchronous Module Definition) and CommonJS to allow developers to modularize and load their code.
 
-You can add support for AMD/CommonJS loaders to your Leaflet plugin by following this pattern based on the [Universal Module  Definition](https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js)
+You can add support for AMD/CommonJS loaders to your Cartographer plugin by following this pattern based on the [Universal Module  Definition](https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js)
 
 ```js
 (function (factory, window) {
@@ -197,11 +197,11 @@ You can add support for AMD/CommonJS loaders to your Leaflet plugin by following
         window.L.YourPlugin = factory(L);
     }
 }(function (L) {
-    var MyLeafletPlugin = {};
+    var MyCartographerPlugin = {};
     // implement your plugin
 
     // return your plugin when you are done
-    return MyLeafletPlugin;
+    return MyCartographerPlugin;
 }, window));
 ```
 
@@ -210,12 +210,12 @@ Now your plugin is available as an AMD and CommonJS module and can be used in mo
 
 ## Adding to the plugins list
 
-Once your plugin is published, it is a good idea to add it to the [Leaflet plugins list](http://leafletjs.com/plugins.html). To do so:
+Once your plugin is published, it is a good idea to add it to the [Cartographer plugins list](http://leafletjs.com/plugins.html). To do so:
 
-* [Fork](https://help.github.com/articles/fork-a-repo/) the Leaflet repo.
+* [Fork](https://help.github.com/articles/fork-a-repo/) the Cartographer repo.
 * In the `docs/plugins.md` file, find the section your plugin should go in, and add a table row with information and links about your plugin.
 * Commit the code to your fork.
-* [Open a pull request](https://help.github.com/articles/creating-a-pull-request/) from your fork to Leaflet's original repo.
+* [Open a pull request](https://help.github.com/articles/creating-a-pull-request/) from your fork to Cartographer's original repo.
 
-Once the pull request is done, a Leaflet maintainer will have a quick look at your
+Once the pull request is done, a Cartographer maintainer will have a quick look at your
 plugin and, if everything looks right, your plugin will appear in the list shortly thereafter.
