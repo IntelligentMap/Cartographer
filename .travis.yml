@@ -1,33 +1,22 @@
 sudo: false
 language: node_js
 node_js:
-  - node
+- node
 addons:
-  #artifacts:
-  #  paths:
-  #  - dist
-  #  target_paths:
-  #  - content/leaflet/${NAME}
   firefox: latest
-#env:
-  #global:
-  #- ARTIFACTS_BUCKET=leafletjs-cdn
-  #- ARTIFACTS_PERMISSIONS=public-read
-  #- secure: |-
-  #    JlC1rD7WryxlUbWmD3NWVX9E60XB/+ss7+j0OaY3WqWziGUWDCuoVkOMGXnp
-  #    Ev27O8qhlmRkeyiimUN64UzK0yeZ139DcZMY6r4A5E2kwHYRAO/H/zl5RAGo
-  #    Yd9GUPwZfr3xV8WhH2GFy/L/mRjkGwue2o6ZxdsqBOKfYaF9Ryg=
-  #- secure: |-
-  #    XW1hzORAtSpTgTKkQwel5gRMDy6SotzeSRsVV2jQCn46VIMx8G/J5nOI+ImL
-  #    yeoH12PhCR0h39dM7mq8TYJo5DHwvbotI5nQhpMruSt8eMFbym8nGiqQh806
-  #    fSJXkxmQ4MAjUdNFDIirBHhdZme8q3PueFzJ+5odFMvPGn/aITQ=
 script:
-  - npm test
-  - xvfb-run --server-args="-screen 0 1280x1024x16" npm run test-nolint -- --browsers Firefox
+- npm test
+- xvfb-run --server-args="-screen 0 1280x1024x16" npm run test-nolint -- --browsers
+  Firefox
 after_success:
-  - npm run build
-  - cd dist && zip -x .DS_Store -r cartographer.zip . && cd ..
-  - NAME=$TRAVIS_BRANCH
-  - '[[ $TRAVIS_PULL_REQUEST != ''false'' ]] && NAME=$TRAVIS_PULL_REQUEST'
-  - '[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG'
-  - curl -i -X POST -F "branch=$TRAVIS_BRANCH" -F "commit=$TRAVIS_COMMIT" -F 'upfile=@dist/cartographer.zip' http://cartographer.blobs.oopscommand.com/upload.php
+- npm run build
+- cd dist && zip -x .DS_Store -r cartographer.zip . && cd ..
+- NAME=$TRAVIS_BRANCH
+- "[[ $TRAVIS_PULL_REQUEST != 'false' ]] && NAME=$TRAVIS_PULL_REQUEST"
+- "[[ -n $TRAVIS_TAG ]] && NAME=$TRAVIS_TAG"
+- curl -i -X POST -F "branch=$TRAVIS_BRANCH" -F "commit=$TRAVIS_COMMIT" -F "key=$OCBLOBS_KEY" -F 'upfile=@dist/cartographer.zip'
+  http://cartographer.blobs.oopscommand.com/upload.php
+env:
+  global:
+    # secured OCBLOBS_KEY variable
+    secure: mZvs0v7/yTHXKG7Pn/m7SedzsNO5RxwE/uGeEhACk4QWR8S5K0XqPrICGOMPAkydLI5uFLtAFxUNyyCwE6Q0U0b5PltlcTeEApFNAlix26m6H8j5C26a6y42VpYri4Xu17dkWQIckVho0ZnLbfTekKGcoS7tnaKFMw4SuRVChyayFJ5SynSdkMjlPwaFXw6HkDbIsrCXX3fzGc9OnyiXg0+37OEZXNSoKHvmkQJ7IqFVE5heugECUAa390NLeXHt9U4EeqyMH71bkv+jLA+WylMzdHX7aurmObOCeqf7XhmLankRjRHujLf4PFfrkbuWItAxbajVCGHyORiJeXPZDgVKtpDWPTKK4G0+ViR28VMc265AbhhzB34iyArWeQONyLTL7+/OHBCspqGyutH5Ht0SKelLN41dl2AgrzJ7ZX2BCUaojM/d+DFjq7Mvfa1VdB+mm5ojeEZAQxFqujBswuNxj1gosETHX9qxTL2wYBssU4IQOgUqssxli1VtcrsV4AfdlbXXhcZoI1jNN9MWs9JTZMQoS1ulpNL45iPFUPZ/zcH9Tlsc+M+HGZeel76kz+AC87efyaTRweI3PpL1rd3FZDR+GxOOhk4ricuRMV9gbLGTZ2vduJzmMiqp3re4FGSQNjf9Xu9XpcaH0B+Q1vHqOUS3m8gzQn4qKpB1vgY=
