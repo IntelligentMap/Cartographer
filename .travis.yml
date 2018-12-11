@@ -6,8 +6,7 @@ addons:
   firefox: latest
 script:
 - npm test
-- xvfb-run --server-args="-screen 0 1280x1024x16" npm run test-nolint -- --browsers
-  Firefox
+- xvfb-run --server-args="-screen 0 1280x1024x16" npm run test-nolint -- --browsers Firefox
 after_success:
 - npm run build
 - cd dist && zip -x .DS_Store -r cartographer.zip . && cd ..
