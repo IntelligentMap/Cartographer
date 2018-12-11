@@ -15,7 +15,7 @@
                 cssFile: 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css',
                 css: 'body {\n\tmargin: 0;\n}\nhtml, body, #leaflet {\n\theight: 100%\n}',
                 jsFile: 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js',
-                js: "var map = new Cartographer.Map('leaflet', {\n\tlayers: [\n\t\tnew L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n\t\t\t'attribution': 'Map data © <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors'\n\t\t})\n\t],\n\tcenter: [0, 0],\n\tzoom: 0\n});"
+                js: "var map = new Cartographer.Map('leaflet', {\n\tlayers: [\n\t\tnew Cartographer.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n\t\t\t'attribution': 'Map data © <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors'\n\t\t})\n\t],\n\tcenter: [0, 0],\n\tzoom: 0\n});"
             };
 
             var hash = location.hash.substr(1);
