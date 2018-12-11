@@ -12,10 +12,10 @@
                 title: 'Cartographer',
                 description: "Cartographer is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 37 KB of gzipped JS code, it has all the mapping features most developers ever need.",
                 html: '<div id="leaflet"></div>',
-                cssFile: 'http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css',
+                cssFile: 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css',
                 css: 'body {\n\tmargin: 0;\n}\nhtml, body, #leaflet {\n\theight: 100%\n}',
-                jsFile: 'http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js',
-                js: "var map = new Cartographer.Map('leaflet', {\n\tlayers: [\n\t\tnew L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n\t\t\t'attribution': 'Map data © <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors'\n\t\t})\n\t],\n\tcenter: [0, 0],\n\tzoom: 0\n});"
+                jsFile: 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js',
+                js: "var map = new Cartographer.Map('leaflet', {\n\tlayers: [\n\t\tnew L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n\t\t\t'attribution': 'Map data © <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors'\n\t\t})\n\t],\n\tcenter: [0, 0],\n\tzoom: 0\n});"
             };
 
             var hash = location.hash.substr(1);
@@ -29,11 +29,11 @@
 
             if (config.version) {
                 if (config.version === 'master') {
-                    config.cssFile = 'http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css',
-                    config.jsFile = 'http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js'
+                    config.cssFile = 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css',
+                    config.jsFile = 'https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js'
                 } else {
-                    config.cssFile = `http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css`
-                    config.jsFile = `http://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js`
+                    config.cssFile = `https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.css`
+                    config.jsFile = `https://cartographer.blobs.oopscommand.com/uploads/latest/cartographer.js`
                 }
 
             }
@@ -86,7 +86,7 @@
             }
 
             if (config.provider === 'jsfiddle') {
-                form = createForm('http://jsfiddle.net/api/post/library/pure/');
+                form = createForm('https://jsfiddle.net/api/post/library/pure/');
                 form.createInput('title', config.title);
                 form.createInput('description', config.description);
                 form.createInput('resources', `${config.cssFile},${config.jsFile}`);
