@@ -16,8 +16,6 @@ If you want to **get involved** with Cartographer development, check out the [co
 Let's make the best mapping library that will ever exist,
 and push the limits of what's possible with online maps!
 
-[![Build Status](https://travis-ci.org/IntelligentMap/Cartographer.svg?branch=master)](https://travis-ci.org/IntelligentMap/Cartographer)
-
  [contributors]: https://github.com/IntelligentMap/IntelligentMap/graphs/contributors
  [features]: http://cartographer.oopscommand.com/#features
  [plugins]: http://cartographer.oopscommand.com/plugins.html
