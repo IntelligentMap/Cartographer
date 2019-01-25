@@ -235,8 +235,6 @@ LatLngBounds.prototype = {
 	}
 };
 
-// TODO International date line?
-
 // @factory L.latLngBounds(corner1: LatLng, corner2: LatLng)
 // Creates a `LatLngBounds` object by defining two diagonally opposite corners of the rectangle.
 

@@ -287,8 +287,6 @@ export var Canvas = Renderer.extend({
 		}
 
 		this._fillStroke(ctx, layer);
-
-		// TODO optimization: 1 fill/stroke for all features with equal style instead of 1 for each feature
 	},
 
 	_updateCircle: function (layer) {

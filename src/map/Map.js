@@ -729,7 +729,6 @@ export var Map = Evented.extend({
 		this.fire('locationfound', data);
 	},
 
-	// TODO Appropriate docs section?
 	// @section Other Methods
 	// @method addHandler(name: String, HandlerClass: Function): this
 	// Adds a new `Handler` to the map, given its name and constructor function.
@@ -919,7 +918,6 @@ export var Map = Evented.extend({
 		return new Bounds(topLeftPoint, topLeftPoint.add(this.getSize()));
 	},
 
-	// TODO: Check semantics - isn't the pixel origin the 0,0 coord relative to
 	// the map pane? "left point of the map layer" can be confusing, specially
 	// since there can be negative offsets.
 	// @method getPixelOrigin(): Point
@@ -965,7 +963,6 @@ export var Map = Evented.extend({
 	// Returns the scale factor to be applied to a map transition from zoom level
 	// `fromZoom` to `toZoom`. Used internally to help with zoom animations.
 	getZoomScale: function (toZoom, fromZoom) {
-		// TODO replace with universal implementation after refactoring projections
 		var crs = this.options.crs;
 		fromZoom = fromZoom === undefined ? this._zoom : fromZoom;
 		return crs.scale(toZoom) / crs.scale(fromZoom);

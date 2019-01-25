@@ -195,6 +195,4 @@ describe("Class", function () {
 			expect(q.called).to.be.ok();
 		});
 	});
-
-	// TODO Class.mergeOptions
 });
