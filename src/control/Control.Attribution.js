@@ -35,11 +35,11 @@ export var Attribution = Control.extend({
 		this._container = DomUtil.create('div', 'leaflet-control-attribution');
 		DomEvent.disableClickPropagation(this._container);
 
-		map._layers.forEach(function (layer) {
-			if (layer.getAttribution) {
-				this.addAttribution(layer.getAttribution());
+		for (const layerId in map._layers) {
+			if (map._layers[layerId].getAttribution) {
+				this.addAttribution(map._layers[layerId].getAttribution());
 			}
-		});
+		}
 
 		this._update();
 
