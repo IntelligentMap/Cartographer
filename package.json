@@ -55,7 +55,7 @@
   "eslintConfig": {
     "root": true,
     "globals": {
-      "L": true
+      "Cartographer": true
     },
     "env": {
       "commonjs": true,
@@ -94,7 +94,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/IntelligentMap/IntelligentMap.git"
+    "url": "https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer"
   },
   "keywords": [
     "gis",
