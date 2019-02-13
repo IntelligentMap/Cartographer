@@ -1,4 +1,4 @@
-Cartographer is the leading open-source JavaScript library for **mobile-friendly interactive maps**, based on [Leaflet][official website].
+Cartographer is the leading open-source JavaScript library for **mobile-friendly interactive maps**, based on Leaflet.
 Weighing just about 37 KB of gzipped JS code, it has all the mapping [features][] most developers ever need.
 
 Cartographer is designed with *simplicity*, *performance* and *usability* in mind.
@@ -16,13 +16,13 @@ If you want to **get involved** with Cartographer development, check out the [co
 Let's make the best mapping library that will ever exist,
 and push the limits of what's possible with online maps!
 
- [contributors]: https://github.com/IntelligentMap/IntelligentMap/graphs/contributors
- [features]: http://cartographer.oopscommand.com/#features
- [plugins]: http://cartographer.oopscommand.com/plugins.html
- [well-documented]: http://cartographer.oopscommand.com/reference.html "IntelligentMap API reference"
- [source code]: https://github.com/IntelligentMap/IntelligentMap "IntelligentMap GitHub repository"
- [hosted on GitHub]: http://github.com/IntelligentMap/IntelligentMap
- [contribute]: https://github.com/IntelligentMap/IntelligentMap/blob/master/CONTRIBUTING.md "A guide to contributing to IntelligentMap"
- [official website]: http://cartographer.oopscommand.com
- [download page]: http://cartographer.oopscommand.com/download.html
+ [contributors]: https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer/graphs/master
+ [features]: https://git.oopscommand.com/
+ [plugins]: https://git.oopscommand.com/intelligentmap/cartographer-team
+ [well-documented]: https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer/wikis/home "Cartographer API reference"
+ [source code]: https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer "Cartographer git repository"
+ [hosted on GitHub]: http://github.com/IntelligentMap/Cartographer
+ [contribute]: https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer/blob/master/CONTRIBUTING.md "A guide to contributing to Cartographer"
+ [official website]: https://blog.oopscommand.com
+ [download page]: https://git.oopscommand.com/intelligentmap/cartographer-team/cartographer/releases
 
